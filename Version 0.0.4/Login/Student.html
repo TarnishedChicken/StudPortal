@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="/img/tcu.png">
+  <link rel="stylesheet" href="/Styles/Student.css" />
+  <title>Student</title>
+</head>
+<body>
+  <!--header-->
+  <div class='header'>
+    <button id='loginTab' class='tab selected' onclick='openTab(loginContent,loginTab)'><span>Log In</span></button>
+    <button id='enrollTab' class='tab' onclick='openTab(enrollContent,enrollTab)'><span>Enroll</span></button>
+  </div>
+  
+  <!--log tab container -->
+  <div id='loginContent' class='tabContent selectedTab'>
+    <div class="userChoice">
+      <img src="/img/tcu.png" alt="University Logo" class="logo">
+      <div class="title">
+        <h1>Taguig City University</h1>
+        <h3>Taguig City, Metro Manila</h3>
+      </div>
+    </div>
+
+
+    <div class="student-badge">Student</div>
+
+
+   <div id="error-message" class="error-message"></div>
+   <div id="success-message" class="success-message"></div>
+
+    <form onsubmit="return validateLogin(event)">
+        <div class="form-group">
+            <div class="input-container">
+                <div class="input-icon"><i class="ri-user-fill"></i></div>
+                <input type="text" id="username" class="form-input" placeholder="USER ID:" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-container">
+                <div class="input-icon"><i class="ri-lock-2-fill"></i></div>
+                <input type="password" id="password" class="form-input" placeholder="PASSWORD" 
+                       onkeypress="handleKeyPress(event)" required>
+            </div>
+        </div>
+        
+        <button type="submit" id="loginBtn" class="login-btn">LOGIN</button>
+    </form>
+
+    <script>
+        //====validation function=====
+        function validateLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            hideMessages();
+            
+            if (!username || !password) {
+                showError('Please fill in all fields.');
+                return false;
+            }
+            
+            const validCredentials = {
+                'admin': 'admin',
+                'student': 'student2383',
+                'instructor': 'instructor2383'
+            };
+            
+            
+            if (validCredentials[username] && validCredentials[username] === password) {
+                showSuccess('Login successful! Redirecting...');
+                
+                const loginBtn = document.getElementById('loginBtn');
+                loginBtn.innerHTML = 'LOGGING IN...';
+                loginBtn.disabled = true;
+                
+                setTimeout(() => {
+                    if (username === 'admin') {
+                        window.location.href = 'Home.html';
+                    } else if (username === 'student') {
+                        window.location.href = '../Home.html';
+                    } else if (username === 'instructor') {
+                        window.location.href = 'instructor.html';
+                    } else {
+                        window.location.href = '../Home.html';
+                    }
+                }, 1500);
+                
+                return true;
+            } else {
+                showError('Invalid username or password. Please try again.');
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+                
+                return false;
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                validateLogin(event);
+            }
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                hideMessages();
+            }, 3000);
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+        
+        function hideMessages() {
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+            
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.innerHTML = 'LOGIN';
+            loginBtn.disabled = false;
+        }
+    </script>
+
+
+  
+  
+  <!--enroll tab container-->
+  <div id='enrollContent' class='tabContent'>
+    
+  </div>
+  <script src="/Functions/tabFunc.js"></script>
+</body>
+</html>

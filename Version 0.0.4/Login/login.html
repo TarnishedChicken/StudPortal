@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="/img/tcu.png">
+  <link rel="stylesheet" href="/Styles/login.css" />
+  <title>Login</title>
+</head>
+<body>
+  <!--header-->
+  <div class='header'>
+    <button id='loginTab' class='tab selected' onclick='openTab(loginContent,loginTab)'><span>Log In</span></button>
+    <button id='enrollTab' class='tab' onclick='openTab(enrollContent,enrollTab)'><span>Enroll</span></button>
+  </div>
+  
+  <!--log tab container -->
+  <div id='loginContent' class='tabContent selectedTab'>
+    <div class="userChoice">
+      <img src="/img/tcu.png" alt="University Logo" class="logo">
+      <div class="title">
+        <h1>Taguig City University</h1>
+        <h3>Taguig City, Metro Manila</h3>
+      </div>
+    </div>
+    
+    <div class="buttons">
+      <button onclick="window.location.href='Administrator.html'">Administrator</button>
+      <button onclick="window.location.href='Instructors.html'">Instructor</button>
+      <button onclick="window.location.href='Student.html'">Student</button>
+    </div>
+  </div>
+  
+  <!--enroll tab container-->
+  <div id='enrollContent' class='tabContent'>
+    
+  </div>
+  <script src="/Functions/tabFunc.js"></script>
+</body>
+</html>
