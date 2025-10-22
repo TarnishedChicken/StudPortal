@@ -44,7 +44,7 @@ body::before {
   height: 100%;
   background:
     linear-gradient(to right,rgba(72, 71, 71, 0.7), rgba(72, 71, 71, 1)),
-    url('img/Background.png') no-repeat center center fixed;
+    url('/img/Background.png') no-repeat center center fixed;
   background-size: cover;
   z-index: -1;
 }

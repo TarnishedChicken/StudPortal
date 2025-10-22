@@ -4,7 +4,7 @@ export default class CookieHandler{
     }
     setCookie(varKey, val,expDays,toCache=true){
         const d=new Date()
-        d.setTime(d.getTime()+toMs(expDays))
+        d.setTime(d.getTime()+this.toMs(expDays))
         document.cookie=`${varKey}=${val}; expires=${d.toUTCString()}; path=/`
         if(toCache) this.caches.set(varKey,val)
     }
@@ -13,11 +13,11 @@ export default class CookieHandler{
         for(let cookie of cookies){
             let ci=cookie.indexOf(varKey)
             if(ci==-1) continue
-            let cval=cookie.substring(ci+1,cookie.length)
-            if(toCache) this.caches.set(keyVal,cval)
+            let cval=cookie.substring(ci+1+varKey.length,cookie.length)
+            if(toCache) this.caches.set(varKey,cval)
             return cval
         }
-        if(toCache) this.caches.set(keyVal,null)
+        if(toCache) this.caches.set(varKey,null)
         return null
     }
     getCache(varKey){
