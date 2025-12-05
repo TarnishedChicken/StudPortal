@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TCU SIAS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* About Section */
+        .about-section {
+            background: #e8ecf3;
+            padding: 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .vision-cards {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: space-between;
+            background: #e8ecf3;
+        }
+
+        .card {
+            background: white;
+            padding: 50px 40px;
+            text-align: center;
+            margin: 30px 30px 30px 30px;
+            border-radius: 12px;
+      
+        }
+
+        .card:last-child {
+            border-right: none;
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid;
+        }
+
+        .card:nth-child(1) .card-icon {
+            border-color: #34495e;
+            background: #34495e;
+        }
+
+        .card:nth-child(2) .card-icon {
+            border-color: #e74c3c;
+            background: #e74c3c;
+        }
+
+        .card:nth-child(3) .card-icon {
+            border-color: #95a84d;
+            background: #95a84d;
+        }
+
+        .icon-inner {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:nth-child(1) .icon-inner {
+            border: 3px solid white;
+        }
+
+        .card:nth-child(2) .icon-inner {
+            border: 3px solid #e74c3c;
+        }
+
+        .card:nth-child(3) .icon-inner {
+            border: 3px solid #95a84d;
+        }
+
+        .icon-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .card:nth-child(1) .icon-dot {
+            background: #34495e;
+        }
+
+        .card:nth-child(2) .icon-dot {
+            background: #e74c3c;
+        }
+
+        .card:nth-child(3) .icon-dot {
+            background: #95a84d;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+            background: white;
+            padding: 80px 100px;
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+        }
+
+        .about-text h2 {
+            color: #7f8c8d;
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .about-text h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-weight: normal;
+            line-height: 1.7;
+        }
+
+        .about-text p {
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            background: #D72D27;
+            color: white;
+            padding: 50px 100px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #bdc3c7;
+            font-size: 14px;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer-column a:hover {
+            color: #e74c3c;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #4a5f7f;
+            color: #95a5a6;
+            font-size: 13px;
+        }
+
+        @media (max-width: 1024px) {
+            .vision-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .card:last-child {
+                border-bottom: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                padding: 50px 40px;
+            }
+
+            .footer-section {
+                padding: 40px 40px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                padding: 40px 20px;
+            }
+
+            .footer-section {
+                padding: 30px 20px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- About Section -->
+    <div class="about-section">
+        <!-- Hero Image - Replace src with your actual image -->
+        <img src="/img/Background.png" alt="Taguig City University" class="hero-image">
+
+        <div class="vision-cards">
+            <div class="card">
+                <div class="card-icon">
+                    <div class="icon-inner">
+                        <div class="icon-dot"></div>
+                    </div>
+                </div>
+                <p>To nurture a vibrant culture of academic wellness responsive to the challenges of technology and the global community.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <div class="icon-inner">
+                        <div class="icon-dot"></div>
+                    </div>
+                </div>
+                <p>An eminent center of excellent higher education for societal advancement.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <div class="icon-inner">
+                        <div class="icon-dot"></div>
+                    </div>
+                </div>
+                <p>Social transformation for a caring community and an ecologically balanced country.</p>
+            </div>
+        </div>
+
+        <div class="about-content">
+            <div class="logo-container">
+                <!-- Replace src with your actual TCU logo -->
+                <img src="/img/tcu.png" alt="TCU Logo" class="logo">
+            </div>
+            <div class="about-text">
+                <h2>About TCU SIAS</h2>
+                <h3>The Taguig City University System Information & Admission System (TCU SIAS) is an integrated online platform designed to provide students, faculty, and administrators with efficient and accessible services.</h3>
+                <p>Through SISA, applicants can easily process their admission requirements, while enrollees can conveniently access academic information, course information, announcements, and other essential university updates. Faculty and staff can also use the system to manage data, streamline workflows, and ensure smooth operations across the university.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About TCU</h3>
+                <p>Taguig City University is committed to providing quality education and fostering academic excellence for societal advancement.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Admissions</a>
+                <a href="#">Programs</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>Taguig City, Metro Manila</p>
+                <p>info@tcu.edu.ph</p>
+                <p>(02) 1234-5678</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Taguig City University. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
