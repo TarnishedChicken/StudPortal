@@ -22,10 +22,29 @@
     --tran-05: all 0.5s ease;
 }
 body{
-    height: 100vh;
+    height: 200vh;
     background: var(--body-color);
     transition: var(--tran-05);
+    position: relative;
+  
 }
+/* ====== test ==== */
+body::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url('/img/tcu.png');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  left: 50px;
+  opacity: 0.03; 
+  z-index: -1;/
+}
+
+
+
 
 body.dark{
     --body-color: #18191A;
@@ -285,7 +304,6 @@ body.dark .switch::before{
     left: 250px;
     height: 100vh;
     width: calc(100% -250px);
-    background-color: var(--body-color);
     transition: var(--tran-05);
 }
 .home .text{
@@ -366,7 +384,8 @@ body.dark .switch::before{
     justify-content: center;
     color: white;
     border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.381);
+    
 }
 
 .user-avatar svg {
@@ -392,7 +411,7 @@ body.dark .switch::before{
     height: 280px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
     margin-bottom: 20px;
 }
 
@@ -462,7 +481,8 @@ body.dark .switch::before{
     background: var(--sidebar-color);
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--tran-05);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
 }
 
 .section-header {
@@ -470,6 +490,7 @@ body.dark .switch::before{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    
 }
 
 .section-header h2 {
@@ -490,10 +511,12 @@ body.dark .switch::before{
 }
 
 /* Learning Modules */
+
 .modules-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+
 }
 
 .module-card {
@@ -514,10 +537,13 @@ body.dark .switch::before{
     background: var(--sidebar-color);
     border-radius: 10px;
     display: flex;
+    transition: var(--tran-05);
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
     color: var(--text-color);
+    font-size: 24px;
+    border: 2px solid var(--text-color);
 }
 
 .module-icon svg {
@@ -556,13 +582,14 @@ body.dark .switch::before{
 }
 
 /* Enrolled Subjects */
-.subjects-grid {
+.section .subjects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 18px;
+    
 }
 
-.subject-card {
+.section .subject-card {
     background: var(--primary-color-light);
     border-radius: 12px;
     padding: 20px;
@@ -594,6 +621,7 @@ body.dark .switch::before{
     justify-content: center;
     color: var(--text-color);
     align-self: center;
+    transition: var(--tran-05);
 }
 
 .subject-icon svg {
@@ -622,15 +650,19 @@ body.dark .switch::before{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: var(--tran-05);
 }
 
 .sidebar-section {
     background: var(--sidebar-color);
     border-radius: 15px;
-    padding: 27px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
+    padding: 28px;
+    transition: var(--tran-05);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
+    margin-bottom: 15px;
 }
+
+
 
 .sidebar-section .section-header {
     margin-bottom: 15px;
@@ -645,6 +677,7 @@ body.dark .switch::before{
     display: flex;
     gap: 15px;
     justify-content: center;
+    transition: var(--tran-05);
 }
 
 .instructor {
@@ -675,6 +708,8 @@ body.dark .switch::before{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: var(--tran-05);
+
 }
 
 .announcement {
@@ -682,6 +717,7 @@ body.dark .switch::before{
     padding: 15px;
     border-radius: 10px;
     border-left: 4px solid #c93737;
+    transition: var(--tran-05);
 }
 
 .announcement p {
@@ -689,6 +725,8 @@ body.dark .switch::before{
     color: var(--text-color);
     line-height: 1.6;
     margin-bottom: 8px;
+    transition: var(--tran-05);
+
 }
 
 .more-link {
@@ -705,8 +743,8 @@ body.dark .switch::before{
 
 /* About Section */
 .about-section {
-    background: var(--body-color);
     padding: 0;
+    /* transition: var(--tran-05); */
 }
 
 .hero-image {
@@ -719,17 +757,20 @@ body.dark .switch::before{
 .vision-cards {
     display: grid;
     grid-template-columns: repeat(3, 400px);
-    gap: space-between;
-    background: var(--body-color);
     justify-content: center;
+    transition: var(--tran-05);
+
 }
 
 .card {
     background: var(--sidebar-color);
-    padding: 15px 50px;
+    padding: 15px 10px;
     text-align: center;
-    margin: 20px 10px 20px 30px;
+    margin: 20px 20px 20px 20px;
     border-radius: 12px;
+    transition: var(--tran-05);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
+
       
 }
 
@@ -746,6 +787,7 @@ body.dark .switch::before{
     align-items: center;
     justify-content: center;
     border: 3px solid;
+    margin-bottom: 5px;
 }
 
 .ri-focus-2-fill{
@@ -791,6 +833,7 @@ body.dark .switch::before{
     align-items: start;
     background: var(--sidebar-color);
     padding: 80px 100px;
+    transition: var(--tran-05);
 }
 
 .logo-container {
@@ -828,15 +871,16 @@ body.dark .switch::before{
 /* === BASE PROFILE PAGE === */
 .profile-page-wrapper * {
   box-sizing: border-box;
+  transition: var(--tran-05);
+
 }
 
 .profile-page-wrapper {
-  background: var(--body-color);
   min-height: 100vh;
   padding-bottom: 30px;
   font-family: "Poppins", sans-serif;
-
   margin-left: 88px;
+  transition: var(--tran-05);
 }
 
 /* Move content when sidebar is open */
@@ -852,14 +896,13 @@ body.dark .switch::before{
 /* === PROFILE PAGE CONTENT === */
 .profile-page-wrapper .hero-banner1 {
   width: 100%;
-  height: 250px;
+  height: 270px;
   object-fit: cover;
   display: block;
 }
 
 .profile-page-wrapper .profile-header {
-  background: var(--body-color);
-  padding: 0 60px 0px;
+  padding: 0 80px 0px;
   position: relative;
 }
 
@@ -903,19 +946,24 @@ body.dark .switch::before{
   font-weight: 600;
   display: inline-block;
   margin-top: 15px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.381);
+
 }
 
 .profile-page-wrapper .profile-content {
   padding: 0 40px;
-  max-width: 1400px;
+  /* max-width: 1400px; */
   margin: 0 auto;
   margin-top: 0px;
+  transition: var(--tran-05);
 }
 
 .profile-page-wrapper .info-cards {
   display: flex;
   gap: 25px;
   margin-top: 0px;
+  padding: 20px 20px 20px 20px;
+
 }
 
 .profile-page-wrapper .info-card,
@@ -923,7 +971,8 @@ body.dark .switch::before{
   background: var(--sidebar-color);
   border-radius: 15px;
   padding: 35px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
+  
 }
 
 .profile-page-wrapper .student-card {
@@ -947,16 +996,17 @@ body.dark .switch::before{
 }
 
 .profile-page-wrapper .card-icon {
-  width: 35px;
-  height: 35px;
+  width: 37px;
+  height: 37px;
   background: var(--primary-color);
-  transition: var(--tran-02);
+  transition: var(--tran-04);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 18px;
+  margin-right: 0;
 }
 
 .profile-page-wrapper .academic-icon {
@@ -994,10 +1044,10 @@ body.dark .switch::before{
 
 /* ====== help section ====== */
 .help-section {
-  background: var(--body-color);
   padding: 40px 60px;
   font-family: "Poppins", sans-serif;
   margin-left: 50px;
+  transition: var(--tran-05);
 }
 #h{
     text-align: center;
@@ -1019,11 +1069,13 @@ body.dark .switch::before{
 .help-title {
   font-size: 36px;
   font-weight: 600;
+  transition: var(--tran-05);
   color: var(--text-color);
 }
 
 .help-subtitle {
   color: var(--text-color);
+  transition: var(--tran-05);
   font-size: 16px;
   margin-top: 10px;
 }
@@ -1031,12 +1083,14 @@ body.dark .switch::before{
 .help-content {
   max-width: 1300px;
   margin: 0 auto;
+  transition: var(--tran-05);
 }
 
 .info-cards {
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
+  transition: var(--tran-05);
 }
 
 .info-card {
@@ -1068,6 +1122,7 @@ body.dark .switch::before{
   color: white;
   border-radius: 8px;
   padding: 8px 10px;
+  transition: var(--tran-05);
   font-size: 14px;
   margin: auto;
   margin-right: 0;
@@ -1078,6 +1133,7 @@ body.dark .switch::before{
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: var(--tran-05);
 }
 
 .faq-item {
@@ -1088,6 +1144,7 @@ body.dark .switch::before{
 
 .faq-question {
   background: var(--sidebar-color);
+  transition: var(--tran-05);
   border: none;
   padding: 12px 16px;
   width: 100%;
@@ -1115,6 +1172,7 @@ body.dark .switch::before{
 .ri-question-answer-fill{
     font-size: 24px;
     color: white;
+    transition: var(--tran-05);
 
 }
 
@@ -1177,10 +1235,10 @@ body.dark .switch::before{
 
 /* === REPORT PAGE === */
 .report-page-wrapper {
-  background: var(--body-color);
   min-height: 100vh;
   padding-bottom: 60px;
   font-family: "Poppins", sans-serif;
+  transition: var(--tran-05);
 }
 
 .hero-banner1 {
@@ -1194,6 +1252,7 @@ body.dark .switch::before{
   text-align: center;
   padding: 30px 20px;
   background-color: var(--primary-color-light);
+  transition: var(--tran-05);
 }
 
 .report-title {
@@ -1210,9 +1269,9 @@ body.dark .switch::before{
 
 .report-content {
   padding: 0 60px;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-left: auto;
+  max-width: 1750px;
+  margin-left: 6%;
+  transition: var(--tran-05);
 }
 
 /* === SUMMARY CARDS === */
@@ -1222,15 +1281,17 @@ body.dark .switch::before{
   margin-top: 30px;
   flex-wrap: wrap;
   justify-content: center;
+
 }
 
 .report-card {
   background: var(--sidebar-color);
   border-radius: 15px;
+  transition: var(--tran-05);
   padding: 30px;
   flex: 1;
   min-width: 280px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1278,9 +1339,11 @@ body.dark .switch::before{
 .grades-section {
   background: var(--sidebar-color);
   border-radius: 15px;
+  transition: var(--tran-05);
   padding: 35px;
   margin-top: 40px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
+
 }
 
 .grades-header h2 {
@@ -1327,6 +1390,7 @@ body.dark .switch::before{
   width: 80%;
   margin: auto;
   box-sizing: border-box;
+  background-color: transparent;
 }
 .enrolled-subjects h2 {
   font-size: 30px;
@@ -1336,20 +1400,27 @@ body.dark .switch::before{
 }
 
 /* Subjects Grid */
-.subjects-grid {
+.module-container .subjects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
+  /* background-color: var(--sidebar-color); */
+  padding: 25px 25px 25px 25px;
+  border-radius: 16px;
+  /* box-shadow: 17px 17px 10px 0px rgba(0, 0, 0, 0.381); */
+  transition: var(--tran-05);
+  
+
 }
 
 /* Subject Card */
 .subject-cardE {
-  background-color: var(--sidebar-color);
+  background-color: var(--primary-color-light);
   border-radius: 10px;
   padding: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
+  box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.381);
   align-items: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -1381,7 +1452,7 @@ body.dark .switch::before{
 
 /* View Button */
 .view-btnE {
-  background-color: var(--primary-color);
+  background-color: #ca3232;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -1392,7 +1463,7 @@ body.dark .switch::before{
 }
 
 .view-btnE:hover {
-  background-color: #b71c1c;
+  background-color: #bd2929;
 }
 
 /* Subject Icon */
@@ -1407,11 +1478,12 @@ body.dark .switch::before{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.70);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 999;
+  
 }
 
 .modal-box {
@@ -1455,6 +1527,9 @@ body.dark .switch::before{
 .schedule-table {
   width: 100%;
   overflow-x: auto;
+  box-shadow: 17px 20px 10px 0px rgba(0, 0, 0, 0.381);
+  border-radius: 8px;
+  transition: var(--tran-05);
 }
 
 /* Schedule days */
@@ -1675,6 +1750,7 @@ body.dark .switch::before{
     font-size: 24px;
     color: white;
 }
+/* ===== responsive design for footer ===== */
 @media (max-width: 1024px) {
     .footer-content {
         grid-template-columns: 1fr;
@@ -1749,7 +1825,7 @@ body.dark .switch::before{
 /* ====== responsive design for About  Page====== */
 @media (max-width: 1024px) {
     .vision-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: 800px
     }
 
     .card {
