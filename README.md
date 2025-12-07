@@ -3,21 +3,21 @@ A simple, responsive(not yet), and modern frontend and backend prototype of the 
 This project was created to be able to modernized the current TCU SIAS, it features such as viewing schedule, subjects, grades, and profile information and especialy "Dark mode".
 
 🚀Features
--Home
-   >Quick overview of student info
-   >Clean UI with modular components
--Profile Page
-   >Student details
-   >Student personal info
--Subjects Module
-   >Displays  enrolled subjects
-   >Organized with icons and celan layouts
--Schedule
-   >Weekly schedule view
-   >simple, readable time and date
--grades
-   >view grades
-   >Tbale style layout
+>Home
+   Quick overview of student info
+   Clean UI with modular components
+>Profile Page
+   Student details
+   Student personal info
+>Subjects Module
+   Displays  enrolled subjects
+   Organized with icons and celan layouts
+>Schedule
+   Weekly schedule view
+   simple, readable time and date
+>Grades
+   view grades
+   Tbale style layout
 
 🔧Tech Stack
  >HTML5
