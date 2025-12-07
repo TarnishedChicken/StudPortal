@@ -1,0 +1,40 @@
+Student Portal
+Authors:  *bienie
+          *Arvin
+0.0.1
+*made login.html ,login.css
+*added to /img tcu.png, background.png
+-made base layout
+-made base design
+-added background and student logo
+
+0.0.2
+*made tabFunc.js
+-added tab functionality
+-added tab header and tab contents
+-namechange made in login.html,login.css |content - loginContent|header - userChoice
+
+0.0.3
+*switchFunc
+-added home dashboard
+-added dark and light mode
+-dynamic date
+
+0.0.4
+-improved UI
+-added login page and functions
+-dashboard changes
+
+0.0.5
+-Added About page
+-Added Report page
+-Added Help & Support page
+-Improve dynamic layout and colors
+
+0.0.6
+-lagayan mo bien
+
+0.0.7
+-added enrolled subject page
+-improve footer
+-fix main css file

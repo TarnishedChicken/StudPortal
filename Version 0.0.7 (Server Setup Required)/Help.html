@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Styles/Home.css" />
+  <link rel="icon" type="image/x-icon" href="/img/tcu.png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Help</title>
+<!-- ===== FAQ TOGGLE SCRIPT ===== -->
+</head>
+<body>
+
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="/img/tcu.png" alt="logo" />
+        </span>
+        <div class="text header-text">
+          <span class="name">Taguig City University</span>
+          <span class="profession">Student</span>
+        </div>
+      </div>
+      <i class="ri-arrow-right-s-line toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+      <div class="menu">
+        <li class="search-box">
+          <input type="text" placeholder="Search..." />
+        </li>
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="/Home.html"><i class="ri-home-4-line icon"></i><span class="text nav-text">Home</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="Subjects.html"><i class="ri-graduation-cap-fill icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/About.html"><i class="ri-team-line icon"></i><span class="text nav-text">About</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Help.html"><i class="ri-questionnaire-line icon"></i><span class="text nav-text">Help & Support</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <li>
+          <a href="/Login/login.html"><i class="ri-logout-box-line icon"></i><span class="text nav-text">Logout</span></a>
+        </li>
+        <li class="mode">
+          <div class="moon-sun">
+            <i class="ri-contrast-2-line icon moon"></i>
+            <i class="ri-sun-line icon sun"></i>
+          </div>
+          <span class="mode-text text">Dark Mode</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+    </div>
+  </nav>
+
+  <section class="help-section">
+  <!-- Hero Banner -->
+   <div id="h">
+      <img src="/img/tcu2.jpg"
+       alt="Help and Support" class="help-hero-banner">
+   </div>
+
+  <!-- Header -->
+  <div class="help-header">
+    <h1 class="help-title">Help & Support</h1>
+    <p class="help-subtitle">Need assistance? We’re here to help you with your student information and admissions concerns.</p>
+  </div>
+
+  <!-- Help Content -->
+  <div class="help-content">
+    <div class="info-cards">
+      <!-- FAQ Section -->
+      <div class="info-card">
+        <div class="card-header">
+          <h2 class="card-title">Frequently Asked Questions</h2>
+          <div class="card-icon">
+            <i class="ri-question-answer-fill"></i>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">How do I reset my SIAS password?</button>
+            <div class="faq-answer">Go to the login page and click “Forgot Password.” Enter your registered email and follow the instructions sent to your inbox.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">I can’t see my enrolled subjects. What should I do?</button>
+            <div class="faq-answer">Please contact the Registrar’s Office or your program head. Sometimes updates are applied after verification by the department.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">How can I update my student information?</button>
+            <div class="faq-answer">Submit a Student Information Update Form to the Registrar’s Office with valid supporting documents.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Where can I check announcements or schedules?</button>
+            <div class="faq-answer">Announcements are posted on your SIAS Dashboard and the official TCU website. Always check these regularly for updates.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="info-card">
+        <div class="card-header">
+          <h2 class="card-title">Contact & Support</h2>
+          <div class="card-icon">
+            <i class="ri-customer-service-fill"></i>
+          </div>
+        </div>
+
+        <p class="contact-text">If you need further assistance, reach out through the following:</p>
+        <div class="info-row"><span class="info-label">Email:</span><span class="info-value">support@tcu.edu.ph</span></div>
+        <div class="info-row"><span class="info-label">Phone:</span><span class="info-value">(02) 555-1234 / (02) 887-4321</span></div>
+        <div class="info-row"><span class="info-label">Office Hours:</span><span class="info-value">Mon – Fri, 8:00 AM – 5:00 PM</span></div>
+        <div class="info-row"><span class="info-label">Location:</span><span class="info-value">Registrar’s Office, Taguig City University</span></div>
+
+        <div class="feedback-form">
+          <h3 class="feedback-title">Send Us a Message</h3>
+          <input type="text" placeholder="Your Name" class="feedback-input">
+          <input type="email" placeholder="Your Email" class="feedback-input">
+          <textarea placeholder="Write your concern..." class="feedback-textarea"></textarea>
+          <button class="feedback-button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.querySelectorAll(".faq-question").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+    item.classList.toggle("active");
+  });
+});
+</script>
+
+<!-- Footer Section -->
+<footer class="footer-section">
+    <div class="footer-content">
+        <div class="footer-left">
+            <div class="footer-logo">
+                <img src="/img/tcu.png" alt="TCU Logo" class="logo-image">
+                <div class="footer-title">
+                    <h2>TCU</h2>
+                    <p class="footer-subtitle">Taguig City University</p>
+                </div>
+            </div>
+            <p class="footer-description">
+                TCU has garnered national recognition for its myriad of academic and extracurricular achievements. As a young institution, TCU showcases exemplary academic performance in board examinations, affirming its dedication to academic excellence. Reach out to us for inquiries, admissions, or collaborations.
+            </p>
+            <div class="footer-address">
+                <strong>Address:</strong> Gen. Santos Ave., Central Bicutan, Taguig City<br>
+                <strong>Phone:</strong> 8635-8300 | <strong>Registrar:</strong> 8635-8300 (7204) / 0961-887-2644
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-right">
+            <div class="footer-links-wrapper">
+                <h3 class="quick-links-title">Quick Links</h3>
+                <div class="quick-links">
+                    <a href="#">Home</a>
+                    <a href="#registrar">Profile</a>
+                    <a href="#guidance">About</a>
+                    <a href="#osas">Help & Support</a>
+                </div>
+            </div>
+
+            <div class="footer-separator"></div>
+
+            <div class="footer-badges">
+                <div class="badge">
+                    <img src="/img/I_Love_Taguig_logo_white.png" alt="I Love Taguig" class="badge-image">
+                </div>
+                <div class="badge">
+                    <img src="/img/Seal_of_registration_AIBC_1_01Apr2024.png" alt="CHED COE" class="badge-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Taguig City University. All rights reserved.</p>
+    </div>
+</footer>
+  <script src="/Functions/switchFunc.js"></script>
+</body>
+</html>
