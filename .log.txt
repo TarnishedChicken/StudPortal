@@ -38,3 +38,5 @@ Authors:  *bienie
 -added enrolled subject page
 -improve footer
 -fix main css file
+-added scroll up function
+-added view function in subject section
