@@ -40,3 +40,8 @@ Authors:  *bienie
 -fix main css file
 -added scroll up function
 -added view function in subject section
+
+
+-fixed repeated body color
+-added background texture
+-improved transitions
