@@ -187,6 +187,7 @@
       <div class="modal-box">
         <span class="close-btnE" onclick="closeModal(event)">&times;</span>
         <h2 id="modalTitle">Subject Title</h2>
+        <p id="modalCode" style="font-weight: bold; margin: 8px 0; color: #666;">Subject Code</p>
         <p id="modalDesc">This is the subject description.</p>
       </div>
     </div>
@@ -195,44 +196,54 @@
       const subjectData = {
         template: {
           title: "Enterprise and Architecture",
+          code: "EA-101",
           desc: "Introduction to enterprise architecture principles, frameworks, and methodologies."
         },
         prog1: {
           title: "Science, Technology and Society",
+          code: "STS-101",
           desc: "Explores the relationship between science, technology, and societal development."
         },
         db: {
           title: "Internet and Advance Office Productivity",
+          code: "IAOP-201",
           desc: "Covers advanced internet technologies and office productivity tools for effective work."
         },
         webtech: {
           title: "Ethics/Etika",
+          code: "ETH-101",
           desc: "Examines ethical theories and their application in personal and professional contexts."
         },
         hci: {
           title: "Philippine Indigenous Communities",
+          code: "PIC-101",
           desc: "Studies the cultures, traditions, and contributions of indigenous communities in the Philippines."
         },
         discrete: {
-          title: "Dual/Individual/Aquatic/Combative/Sports",
+          title: "Dual/Individual/Aquatic\n/Combative/Sports",
+          code: "PE-201",
           desc: "Focuses on physical fitness, healthy habits, and sports participation."
         },
         datacom: {
           title: "Organization and Management Concept",
+          code: "OMC-301",
           desc: "Introduction to organizational structures, management theories, and business practices."
         },
         pe: {
           title: "System Analysis and Design",
+          code: "SAD-301",
           desc: "Covers methodologies and tools for analyzing and designing information systems."
         },
         art: {
           title: "Application Development and Emerging Tech",
+          code: "ADET-401",
           desc: "Explores modern application development techniques and emerging technologies in the IT field."
         }
       };
 
       function openModal(key) {
         document.getElementById("modalTitle").innerText = subjectData[key].title;
+        document.getElementById("modalCode").innerText = subjectData[key].code;
         document.getElementById("modalDesc").innerText = subjectData[key].desc;
         document.getElementById("subjectModal").style.display = "flex";
       }
