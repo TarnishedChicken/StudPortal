@@ -1233,6 +1233,11 @@ body.dark .switch::before{
   background: rgb(234, 19, 19);
 }
 
+.info-row{
+  color: var(--text-color);
+  font-size: 16px;
+}
+
 /* === REPORT PAGE === */
 .report-page-wrapper {
   min-height: 100vh;
@@ -1922,3 +1927,96 @@ body.dark .switch::before{
     grid-template-columns: 1fr;
   }
 }
+
+
+
+
+/* ================== working progress dont touch============================== */
+/* ================= CLASS LIST SECTION  FOR INSTRUCTORS===================== */
+/*
+.class-list-section {
+  margin-top: 20px;
+}
+
+.text-xl {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+#classTableBody{
+  color: var(--text-color);
+  padding: 10px 0;
+}
+
+.class-table-container {
+  overflow-x: auto;
+  margin-top: 5px;
+  border-radius: 8px;
+  background-color: var(--primary-color-light);
+  color: var(--text-color);
+  transition: var(--tran-05);
+  box-shadow: 17px 17px 20px 0px rgba(0, 0, 0, 0.381);
+}
+.class-table {
+  width: 100%; border-collapse: collapse;
+}
+.class-table th, .class-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: var(--sidebar-color);
+    transition: var(--tran-05);
+}
+.class-table th {
+  background: var(--primary-color);
+  color: white;
+
+}
+
+
+.class-switcher {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-radius: 7px;
+    width: 100%;
+    font-size: 14px;
+
+}
+
+
+.class-item {
+    padding: 10px 10px;
+    padding-bottom: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+}
+
+
+.class-item.active {
+    color: var(--text-color);
+}
+
+.class-item.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 7px;
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+/* hover */
+/* .class-item:hover {
+    background: white;
+    border-color: var(--primary-color);
+} */
+
