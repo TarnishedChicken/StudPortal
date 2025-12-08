@@ -22,7 +22,7 @@
     --tran-05: all 0.5s ease;
 }
 body{
-    height: 200vh;
+    height: 100vh;
     background: var(--body-color);
     transition: var(--tran-05);
     position: relative;
@@ -1386,9 +1386,11 @@ body.dark .switch::before{
 
 /* ======================== MODULE CONTAINER ======================== */
 .module-container {
-  padding: 16px; /* 16px */
-  width: 80%;
+  padding: 16px;
+  width: 90%;
   margin: auto;
+  margin-left: 7%;
+  /* margin-left: 10%; */
   box-sizing: border-box;
   background-color: transparent;
 }
@@ -1405,10 +1407,11 @@ body.dark .switch::before{
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
   /* background-color: var(--sidebar-color); */
-  padding: 25px 25px 25px 25px;
+  padding: 20px 20px 20px 20px;
   border-radius: 16px;
   /* box-shadow: 17px 17px 10px 0px rgba(0, 0, 0, 0.381); */
   transition: var(--tran-05);
+  border: 1px solid var(--text-color);
   
 
 }
