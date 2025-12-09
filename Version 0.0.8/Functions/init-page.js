@@ -6,9 +6,9 @@ async function init(){
     placeholder = new mymodule.Placeholders("ph")
 }
 async function retrieveUserInfo(){
-    const session_id = cookies.getCookie("session-id")
-    
+    session_id = await cookies.getCookie("session-id")
     const res = await server.getStudentInfo(session_id)
+    loadAvatar(session_id)
     console.log(res)
     if(res.id=="SESSION_LOST"){
         window.location.href = "./Login/login.html"
@@ -64,6 +64,37 @@ function capitalize(str){
 async function logout(){
     cookies.removeCookie("session-id")
     return
+}
+
+async function loadAvatar(session){
+    const image_url = await server.getAvatar(session)
+    loadImage(image_url)
+}
+async function loadImage(url) {
+    const image_display = document.querySelector(".profile-picture")
+    if(image_display)image_display.src = url
+}
+
+const file_input = document.querySelector('#profile-upload')
+if(file_input)file_input.addEventListener("change", function(){
+    if(this.files&&this.files.length>0){
+        uploadImage()
+    }
+})
+
+async function uploadImage(){
+    const form_data = new FormData()
+    console.log(file_input.files[0])
+    form_data.append("avatar",file_input.files[0])
+    const res = await server.uploadAvatar(session_id,form_data)
+    console.log(res)
+    var image_url = await server.getAvatar(session_id)
+    console.log("ello")
+    window.location.href = "./Prof.html"
+    setTimeout(()=>{
+        loadImage(image_url)
+        console.log("ello")
+    },2000)
 }
 init().then(async ()=>{
     const student = await retrieveUserInfo()

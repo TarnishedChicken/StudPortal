@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/Styles/Style.css" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src = "Functions/load-theme.js"></script>
   <title>Welcome</title>
 </head>
 <body>
@@ -37,7 +38,7 @@
             <a href="/Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
           </li>
           <li class="nav-link">
-            <a href="/Subjects.html"><i class="ri-graduation-cap-fill icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
+            <a href="/Subjects.html"><i class="ri-graduation-cap-line icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
           </li>
           <li class="nav-link">
             <a href="/Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
@@ -81,7 +82,10 @@
       <div class="profile-top">
         <!-- Profile Picture -->
         <img src="/img/531804259_2061702084361405_4314264156643533341_n.jpg" alt="Profile Picture" class="profile-picture">
-        
+        <button id="profile-upload-button">
+          <input type="file" id="profile-upload" >
+          <label id="profile-upload-label" class="ri-image-circle-line" for="profile-upload"></label>
+        </button>
         <!-- Profile Info -->
         <div class="profile-info">
           <h1 class="profile-name"><span class="ph-name"></span></h1>

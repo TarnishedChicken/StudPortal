@@ -5,7 +5,10 @@ export default class Server{
         port : 3001,
         student_info : "/student/info",
         student : "/student/login",
-        student_grades : "/student/grades"
+        student_grades : "/student/grades",
+        student_avatar_upload : "/student/avatar/upload",
+        student_avatar : "/student/avatar",
+        student_schedule : "/student/schedule"
     }
     async login(account){
         let configs=Server.configs
@@ -27,6 +30,32 @@ export default class Server{
         const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_grades}/${session}`)
         const json = await res.json()
         const obj = JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async getAvatar(session){
+        let configs= Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_avatar}/${session}`)
+        console.log(res)
+        const imageblob = await res.blob()
+        const imageurl = URL.createObjectURL(imageblob)
+        console.log(imageurl)
+        return imageurl
+    }
+    async uploadAvatar(session,file){
+        let configs= Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_avatar_upload}/${session}`,{
+            method: "POST",
+            body: file
+        })
+        return setTimeout(()=>{
+            return this.getAvatar(session)
+        },2000)
+    }
+    async getStudentSchedule(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_schedule}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
         return obj
     }
 }

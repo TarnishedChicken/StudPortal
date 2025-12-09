@@ -14,14 +14,19 @@ const body = document.querySelector("body"),
 
 
         modeSwitch.addEventListener("click", () =>{
+            toggleTheme()
+        });
+        function toggleTheme(){
             body.classList.toggle("dark");
-
+            var theme = (body.classList.contains("dark"))? "dark":"light"
+            cookies.setCookie("theme",theme)
+            console.log(theme)
             if(body.classList.contains("dark")){
                 modeText.innerText = "Light Mode"
             }else{
                 modeText.innerText = "Dark Mode"
             }
-        });
+        }
 
 
         // ==date==
@@ -242,7 +247,6 @@ document.addEventListener('keydown', function(e) {
         });
     }
 });
-
 console.log('Student Portal Dashboard initialized successfully!');
 
 

@@ -11,9 +11,11 @@ export default class CookieHandler{
     getCookie(varKey, toCache=false){
         let cookies=decodeURIComponent(document.cookie).split(";")
         for(let cookie of cookies){
-            let ci=cookie.indexOf(varKey)
-            if(ci==-1) continue
-            let cval=cookie.substring(varKey.length+1,cookie.length)
+            let cval = cookie.split("=")[1].trim()
+            let ckey = cookie.split("=")[0].trim()
+            console.log(ckey+ ', ' + cval)
+
+            if (ckey != varKey) continue
             if(toCache) this.caches.set(varKey,cval)
             return cval
         }

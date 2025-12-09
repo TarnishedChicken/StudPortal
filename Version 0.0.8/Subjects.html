@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/Styles/Style.css" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src = "Functions/load-theme.js"></script>
   <title>Enrolled subjects</title>
 </head>
 <body>
@@ -38,7 +39,7 @@
             <a href="/Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
           </li>
           <li class="nav-link">
-            <a href="Subjects"><i class="ri-graduation-cap-fill icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
+            <a href="Subjects"><i class="ri-graduation-cap-line icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
           </li>
           <li class="nav-link">
             <a href="/Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
@@ -78,7 +79,7 @@
 
     <div class="subjects-grid">
       <!-- TEMPLATE -->
-      <div class="subject-cardE" data-subject="template">
+      <!-- <div class="subject-cardE" data-subject="template">
         <div class="subject-infoE">
           <h3>Enterprise <br>and Architecture</h3>
           <button class="view-btnE" onclick="openModal('template')">View</button>
@@ -88,7 +89,6 @@
         </div>
       </div>
 
-      <!-- 1 -->
       <div class="subject-cardE" data-subject="prog1">
         <div class="subject-infoE">
           <h3>Science, Technology and Society</h3>
@@ -99,7 +99,6 @@
         </div>
       </div>
 
-      <!-- 2 -->
       <div class="subject-cardE" data-subject="db">
         <div class="subject-infoE">
           <h3>Internet and Advance<br> Office Productivity</h3>
@@ -110,7 +109,6 @@
         </div>
       </div>
 
-      <!-- 3 -->
       <div class="subject-cardE" data-subject="webtech">
         <div class="subject-infoE">
           <h3>Ethics/Etika <br><br></h3>
@@ -121,7 +119,6 @@
         </div>
       </div>
 
-      <!-- 4 -->
       <div class="subject-cardE" data-subject="hci">
         <div class="subject-infoE">
           <h3>Philippine Indigenous Communities</h3>
@@ -132,7 +129,6 @@
         </div>
       </div>
 
-      <!-- 5 -->
       <div class="subject-cardE" data-subject="discrete">
         <div class="subject-infoE">
           <h3>Dual/Individual/Aquatic/
@@ -144,7 +140,6 @@
         </div>
       </div>
 
-      <!-- 6 -->
       <div class="subject-cardE" data-subject="datacom">
         <div class="subject-infoE">
           <h3>Organization and Management Concept</h3>
@@ -155,7 +150,6 @@
         </div>
       </div>
 
-      <!-- 7 -->
       <div class="subject-cardE" data-subject="pe">
         <div class="subject-infoE">
           <h3>System Analysis <br> and Design</h3>
@@ -166,7 +160,6 @@
         </div>
       </div>
 
-      <!-- 8 -->
       <div class="subject-cardE" data-subject="art">
         <div class="subject-infoE">
           <h3>Application Development and Emerging Tech</h3>
@@ -175,7 +168,7 @@
         <div class="subject-icon">
             <i class="ri-robot-3-fill"></i>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <br>
@@ -191,69 +184,6 @@
         <p id="modalDesc">This is the subject description.</p>
       </div>
     </div>
-
-    <script>
-      const subjectData = {
-        template: {
-          title: "Enterprise and Architecture",
-          code: "EA-101",
-          desc: "Introduction to enterprise architecture principles, frameworks, and methodologies."
-        },
-        prog1: {
-          title: "Science, Technology and Society",
-          code: "STS-101",
-          desc: "Explores the relationship between science, technology, and societal development."
-        },
-        db: {
-          title: "Internet and Advance Office Productivity",
-          code: "IAOP-201",
-          desc: "Covers advanced internet technologies and office productivity tools for effective work."
-        },
-        webtech: {
-          title: "Ethics/Etika",
-          code: "ETH-101",
-          desc: "Examines ethical theories and their application in personal and professional contexts."
-        },
-        hci: {
-          title: "Philippine Indigenous Communities",
-          code: "PIC-101",
-          desc: "Studies the cultures, traditions, and contributions of indigenous communities in the Philippines."
-        },
-        discrete: {
-          title: "Dual/Individual/Aquatic\n/Combative/Sports",
-          code: "PE-201",
-          desc: "Focuses on physical fitness, healthy habits, and sports participation."
-        },
-        datacom: {
-          title: "Organization and Management Concept",
-          code: "OMC-301",
-          desc: "Introduction to organizational structures, management theories, and business practices."
-        },
-        pe: {
-          title: "System Analysis and Design",
-          code: "SAD-301",
-          desc: "Covers methodologies and tools for analyzing and designing information systems."
-        },
-        art: {
-          title: "Application Development and Emerging Tech",
-          code: "ADET-401",
-          desc: "Explores modern application development techniques and emerging technologies in the IT field."
-        }
-      };
-
-      function openModal(key) {
-        document.getElementById("modalTitle").innerText = subjectData[key].title;
-        document.getElementById("modalCode").innerText = subjectData[key].code;
-        document.getElementById("modalDesc").innerText = subjectData[key].desc;
-        document.getElementById("subjectModal").style.display = "flex";
-      }
-
-      function closeModal(e) {
-        if (e.target.classList.contains("modal-overlay") || e.target.classList.contains("close-btnE")) {
-          document.getElementById("subjectModal").style.display = "none";
-        }
-      }
-    </script>
   </section>
 
   <!-- Schedule Section -->
@@ -276,7 +206,7 @@
       <div class="schedule-grid">
         <!-- Monday -->
         <div class="day-column">
-          <div class="day-name">Monday</div>
+          <!-- <div class="day-name">Monday</div>
           <div class="event">
             <div class="event-time">7:30 - 10:30</div>
             <div class="event-title">Enterprise Architecture</div>
@@ -284,13 +214,13 @@
           <div class="event">
             <div class="event-time">10:30 - 12:00</div>
             <div class="event-title">Science, Technology and Society</div>
-          </div>
+          </div> -->
         </div>
 
         <!-- Tuesday -->
         <div class="day-column">
           <div class="day-name">Tuesday</div>
-          <div class="event">
+          <!-- <div class="event">
             <div class="event-time">7:30 - 10:30</div>
             <div class="event-title">Internet and Advance Office Productivity</div>
           </div>
@@ -301,12 +231,12 @@
           <div class="event">
             <div class="event-time">1:00 - 4:00</div>
             <div class="event-title">Philippine Indigenous Communities</div>
-          </div>
+          </div> -->
         </div>
 
         <!-- Wednesday -->
         <div class="day-column">
-          <div class="day-name">Wednesday</div>
+          <!-- <div class="day-name">Wednesday</div>
           <div class="event">
             <div class="event-time">10:30 - 12:00</div>
             <div class="event-title">Science, Technology and Society</div>
@@ -314,26 +244,26 @@
           <div class="event">
             <div class="event-time">3:00 - 5:00</div>
             <div class="event-title">Dual / Individual / Aquatic / Combative / Sports</div>
-          </div>
+          </div> -->
         </div>
 
         <!-- Thursday -->
         <div class="day-column">
           <div class="day-name">Thursday</div>
-          <div class="event">
+          <!-- <div class="event">
             <div class="event-time">7:30 - 10:30</div>
             <div class="event-title">Organization And Management Concept</div>
           </div>
           <div class="event">
             <div class="event-time">10:30 - 12:00</div>
             <div class="event-title">Ethics / Etika</div>
-          </div>
+          </div> -->
         </div>
 
         <!-- Friday -->
         <div class="day-column">
           <div class="day-name">Friday</div>
-          <div class="event">
+          <!-- <div class="event">
             <div class="event-time">8:30 - 10:30</div>
             <div class="event-title">System Analysis and Design</div>
           </div>
@@ -348,16 +278,16 @@
           <div class="event">
             <div class="event-time">5:30 - 8:30</div>
             <div class="event-title">Application Development and Emerging Tech</div>
-          </div>
+          </div> -->
         </div>
 
         <!-- Saturday: explicit "No class schedules" -->
         <div class="day-column">
           <div class="day-name">Saturday</div>
-          <div class="no-classes">
+          <!-- <div class="no-classes">
             <div class="no-classes-icon"></div>
             <div class="no-classes-text">No class schedules</div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -419,7 +349,8 @@
         <p>&copy; 2025 Taguig City University. All rights reserved.</p>
     </div>
 </footer>
-    <script src="/Functions/init-page.js"></script>
+  <script src="/Functions/init-page.js"></script>
   <script src="/Functions/switchFunc.js"></script>
+  <script src ="/Functions/load-grades.js"></script>
 </body>
 </html>
