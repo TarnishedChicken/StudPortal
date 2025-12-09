@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Styles/Style.css" />
+  <link rel="icon" type="image/x-icon" href="/img/tcu.png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Welcome</title>
+</head>
+<body>
+
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="/img/tcu.png" alt="logo" />
+        </span>
+        <div class="text header-text">
+          <span class="name">Taguig City University</span>
+          <span class="profession">Student</span>
+        </div>
+      </div>
+      <i class="ri-arrow-right-s-line toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+      <div class="menu">
+        <li class="search-box">
+          <i class="ri-search-line icon"></i>
+          <input type="text" placeholder="Search..." />
+        </li>
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="/Home.html"><i class="ri-home-4-line icon"></i><span class="text nav-text">Home</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Subjects.html"><i class="ri-graduation-cap-fill icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/About.html"><i class="ri-team-line icon"></i><span class="text nav-text">About</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="/Help.html"><i class="ri-questionnaire-line icon"></i><span class="text nav-text">Help & Support</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <li>
+          <a onclick="logout()"><i class="ri-logout-box-line icon"></i><span class="text nav-text">Logout</span></a>
+        </li>
+        <li class="mode">
+          <div class="moon-sun">
+            <i class="ri-contrast-2-line icon moon"></i>
+            <i class="ri-sun-line icon sun"></i>
+          </div>
+          <span class="mode-text text">Dark Mode</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+    </div>
+  </nav>
+
+  <section class="home">
+        <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div>
+                    <div class="user-name" ><span class="ph-name"></span></div>
+                    <div class="user-year"><span class="ph-year"></span> Year</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <img src="/img/Background.png" alt="University Building">
+            <div class="hero-content">
+                <div class="date">August 5, 2025</div>
+                <h1>Welcome back, <span class="ph-first-name"></span></h1>
+                <p>Always stay updated in your Student portal</p>
+            </div>
+            <div class="student-illustration">
+                <img src="/img/student.png" alt="Student Illustration">
+            </div>
+        </section>
+
+        <div class="main-content">
+            <!-- Learning Modules -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Learning modules</h2>
+                    <a href="#" class="see-all">See all</a>
+                </div>
+                <div class="modules-grid">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="ri-macbook-fill"></i>
+                        </div>
+                        <h3>Programming 1</h3>
+                        <p>Covers basic programming concepts using Java/Python.</p>
+                        <button class="btn-download">Download</button>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="ri-html5-fill"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Frontend and backend development using web technologies.</p>
+                        <button class="btn-download">Download</button>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="ri-router-fill"></i>
+                        </div>
+                        <h3>Networking & Security</h3>
+                        <p>Fundamentals of computer networks and cybersecurity.</p>
+                        <button class="btn-download">Download</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enrolled Subjects -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Enrolled Subjects</h2>
+                    <a href="/Subjects.html" class="see-all">See all</a>
+                </div>
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <div class="subject-info">
+                            <h3>Enterprise and Architecture<br><br></h3>
+                        </div>
+                        <div class="subject-icon">
+                            <i class="ri-building-2-fill"></i>
+                        </div>
+                        <button class="btn-view">View</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-info">
+                            <h3>Science, Technology and Society <br><br></h3>
+                        </div>
+                        <div class="subject-icon">
+                            <i class="ri-microscope-fill"></i>
+                        </div>
+                        <button class="btn-view">View</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-info">
+                            <h3>Internet and Advance Office Productivity</h3>
+                        </div>
+                        <div class="subject-icon">
+                            <i class="ri-global-line"></i>
+                        </div>
+                        <button class="btn-view">View</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Side panel -->
+        <aside class="side-panel">
+            <!-- Course Instructors -->
+            <section class="sidebar-section">
+                <div class="section-header">
+                    <h2>Course Instructors</h2>
+                    <a href="#" class="see-all">See all</a>
+                </div>
+                <div class="instructors">
+                    <div class="instructor">
+                        <img src="/img/teacher1-removebg-preview.png" alt="Instructor 1">
+                    </div>
+                    <div class="instructor">
+                        <img src="/img/teacher2-removebg-preview.png" alt="Instructor 2">
+                    </div>
+                    <div class="instructor">
+                        <img src="/img/teacher3-removebg-preview.png" alt="Instructor 3">
+                    </div>
+                                        <div class="instructor">
+                        <img src="/img/teacher3-removebg-preview.png" alt="Instructor 3">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Announcements -->
+            <section class="sidebar-section announcements-section">
+                <div class="section-header">
+                    <h2>Announcements</h2>
+                    <a href="#" class="see-all">See all</a>
+                </div>
+                <div class="announcements">
+                    <div class="announcement">
+                        <p>The long wait is over classes begin soon! Taguig City University will officially start classes for the First Semester of A.Y. 2025-2026 on Monday, August 11, 2025.</p>
+                        <a href="#" class="more-link">more →</a>
+                    </div>
+                    <div class="announcement">
+                        <p>The long wait is over classes begin soon! Taguig City University will officially start classes for the First Semester of A.Y. 2025-2026 on Monday, August 11, 2025.</p>
+                        <a href="#" class="more-link">more →</a>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <hr>
+
+<!-- Footer Section -->
+<footer class="footer-section">
+    <div class="footer-content">
+        <div class="footer-left">
+            <div class="footer-logo">
+                <img src="/img/tcu.png" alt="TCU Logo" class="logo-image">
+                <div class="footer-title">
+                    <h2>TCU</h2>
+                    <p class="footer-subtitle">Taguig City University</p>
+                </div>
+            </div>
+            <p class="footer-description">
+                TCU has garnered national recognition for its myriad of academic and extracurricular achievements. As a young institution, TCU showcases exemplary academic performance in board examinations, affirming its dedication to academic excellence. Reach out to us for inquiries, admissions, or collaborations.
+            </p>
+            <div class="footer-address">
+                <strong>Address:</strong> Gen. Santos Ave., Central Bicutan, Taguig City<br>
+                <strong>Phone:</strong> 8635-8300 | <strong>Registrar:</strong> 8635-8300 (7204) / 0961-887-2644
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-right">
+            <div class="footer-links-wrapper">
+                <h3 class="quick-links-title">Quick Links</h3>
+                <div class="quick-links">
+                    <a href="#">Home</a>
+                    <a href="#registrar">Profile</a>
+                    <a href="#guidance">About</a>
+                    <a href="#osas">Help & Support</a>
+                </div>
+            </div>
+
+            <div class="footer-separator"></div>
+
+            <div class="footer-badges">
+                <div class="badge">
+                    <img src="/img/I_Love_Taguig_logo_white.png" alt="I Love Taguig" class="badge-image">
+                </div>
+                <div class="badge">
+                    <img src="/img/Seal_of_registration_AIBC_1_01Apr2024.png" alt="CHED COE" class="badge-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Taguig City University. All rights reserved.</p>
+    </div>
+</footer>
+
+    <script src="/Functions/init-page.js"></script>
+  <script src="/Functions/switchFunc.js"></script>
+</body>
+</html>
