@@ -45,3 +45,8 @@ Authors:  *bienie
 -fixed repeated body color
 -added background texture
 -improved transitions
+
+0.0.8
+-added instructors
+-fixed html structure
+-added class lit and grades input
