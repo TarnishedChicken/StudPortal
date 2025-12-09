@@ -6,6 +6,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 :root{
     /*colors*/
     --body-color: #E4E9F7;
@@ -1240,8 +1244,7 @@ body.dark .switch::before{
 
 /* === REPORT PAGE === */
 .report-page-wrapper {
-  min-height: 100vh;
-  padding-bottom: 60px;
+  /* min-height: 100vh; */
   font-family: "Poppins", sans-serif;
   transition: var(--tran-05);
 }
@@ -1933,7 +1936,7 @@ body.dark .switch::before{
 
 /* ================== working progress dont touch============================== */
 /* ================= CLASS LIST SECTION  FOR INSTRUCTORS===================== */
-/*
+
 .class-list-section {
   margin-top: 20px;
 }
@@ -1967,6 +1970,7 @@ body.dark .switch::before{
     border-bottom: 1px solid #ddd;
     background-color: var(--sidebar-color);
     transition: var(--tran-05);
+    text-align: left;
 }
 .class-table th {
   background: var(--primary-color);
@@ -2018,5 +2022,143 @@ body.dark .switch::before{
 /* .class-item:hover {
     background: white;
     border-color: var(--primary-color);
-} */
+}
+/* ---- NEW GRADE TABLE SECTION ---- */
 
+.grade-list-section {
+  /* background-color: yellow; */
+  padding-bottom: 20px;
+  padding-left: 50px;
+  width: 86%;
+  margin: auto;
+}
+
+.grade-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+.grade-table-container {
+  overflow-x: auto;
+  margin-top: 5px;
+  border-radius: 8px;
+  background-color: var(--primary-color-light);
+  color: var(--text-color);
+  transition: var(--tran-05);
+  box-shadow: 17px 17px 20px rgba(0, 0, 0, 0.38);
+}
+
+.grade-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.grade-table th,
+.grade-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: var(--sidebar-color);
+  transition: var(--tran-05);
+  text-align: left;
+}
+
+.grade-table th {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* 👇 Grade input boxes */
+.grade-input {
+  width: 90px;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #888;
+  outline: none;
+}
+
+/* ---- GRADE SWITCHER ---- */
+
+.grade-switcher {
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  border-radius: 7px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.grade-item {
+  padding: 10px 10px;
+  padding-bottom: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 500;
+  color: var(--text-color);
+  position: relative;
+}
+
+.grade-item.active {
+  color: var(--text-color);
+}
+
+.grade-item.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 7px;
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+.grade-input{
+  text-align: center;
+}
+
+#submit-grades-btn1 {
+  background-color: var(--primary-color); 
+  border: 1px solid var(--primary-color);
+  color: white;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--tran-04);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.38);
+}
+#submit-grades-btn1:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+
+#export-grades-btn2 {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  width: 100px;
+  height: 40px;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--tran-04);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.38);
+  margin-left: 10px;
+}
+#export-grades-btn2:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
