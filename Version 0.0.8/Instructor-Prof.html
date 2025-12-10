@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/Styles/Style.css" />
+  <link rel="stylesheet" href="/Styles/instructor-style.css" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <script src = "Functions/load-theme.js"></script>
@@ -18,7 +18,7 @@
         </span>
         <div class="text header-text">
           <span class="name">Taguig City University</span>
-          <span class="profession">Student</span>
+          <span class="profession">Instructor</span>
         </div>
       </div>
       <i class="ri-arrow-right-s-line toggle"></i>
@@ -32,22 +32,22 @@
         </li>
         <ul class="menu-links">
           <li class="nav-link">
-            <a href="/Home.html"><i class="ri-home-4-line icon"></i><span class="text nav-text">Home</span></a>
+            <a href="/Instructor-Home.html"><i class="ri-home-4-line icon"></i><span class="text nav-text">Home</span></a>
           </li>
           <li class="nav-link">
-            <a href="/Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
+            <a href="/Instructor-Prof.html"><i class="ri-user-line icon"></i><span class="text nav-text">Profile</span></a>
           </li>
           <li class="nav-link">
-            <a href="/Subjects.html"><i class="ri-graduation-cap-line icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
+            <a href="/Instructor-Subjects.html"><i class="ri-graduation-cap-line icon"></i><span class="text nav-text">Enrolled Subjects</span></a>
           </li>
           <li class="nav-link">
-            <a href="/Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
+            <a href="/Instructor-Report.html"><i class="ri-file-line icon"></i><span class="text nav-text">Reports</span></a>
           </li>
           <li class="nav-link">
-            <a href="/About.html"><i class="ri-team-line icon"></i><span class="text nav-text">About</span></a>
+            <a href="/Instructor-About.html"><i class="ri-team-line icon"></i><span class="text nav-text">About</span></a>
           </li>
           <li class="nav-link">
-            <a href="Help.html"><i class="ri-questionnaire-line icon"></i><span class="text nav-text">Help & Support</span></a>
+            <a href="/Instructor-Help.html"><i class="ri-questionnaire-line icon"></i><span class="text nav-text">Help & Support</span></a>
           </li>
         </ul>
       </div>
@@ -89,8 +89,7 @@
         <!-- Profile Info -->
         <div class="profile-info">
           <h1 class="profile-name"><span class="ph-name"></span></h1>
-          <p class="profile-year"><span class="ph-year"></span> Year</p>
-          <span class="profile-badge"><span class="ph-course-id"></span>
+          <span class="profile-badge">Instructor</span>
         </div>
       </div>
     </div>
@@ -98,28 +97,27 @@
     <!-- Profile Content -->
     <div class="profile-content">
       <div class="info-cards">
-        <!-- Student Information Card -->
-        <div class="student-card">
+        <!-- Instructor Information Card -->
+        <div class="instructor-card">
           <div class="card-header">
-            <h2 class="card-title">Student Information</h2>
+            <h2 class="card-title">Instructor Information</h2>
             <div class="card-icon">
-                <i class="ri-graduation-cap-fill"></i>
+                <i class="ri-presentation-line"></i>
             </div>
           </div>
           
           <img src="/img/ICT-removebg-preview.png" alt="School Badge" class="card-badge">
           
-          <div class="student-details">
+          <div class="instructor-details">
             <div class="info-row"><div class="info-label">Full Name:</div><div class="info-value"><span class="ph-name"></span></div></div>
-            <div class="info-row"><div class="info-label">Student ID:</div><div class="info-value"><span class="ph-stud-id"></span>24-0001</div></div>
-            <div class="info-row"><div class="info-label">Course:</div><div class="info-value"><span class="ph-course-desc"></span></div></div>
-            <div class="info-row"><div class="info-label">Year Level:</div><div class="info-value"><span class="ph-year"></span> Year</div></div>
+            <div class="info-row"><div class="info-label">Email:</div><div class="info-value"><span class="ph-email"></span></div></div>
+            <div class="info-row"><div class="info-label">Phone No:</div><div class="info-value"><span class="ph-contact-number"></span></div></div>
           </div>
         </div>
 
         <!-- Right Side Cards -->
-        <div style="flex: 1; display: flex; flex-direction: column; gap: 25px;">
-          <!-- Personal Information -->
+        <!-- <div style="flex: 1; display: flex; flex-direction: column; gap: 25px;">
+
           <div class="info-card">
             <div class="card-header">
               <h2 class="card-title">Personal Information</h2>
@@ -136,7 +134,6 @@
             <div class="info-row"><div class="info-label">Current Address:</div><div class="info-value"><span class="ph-current-address"></div></div>
           </div>
 
-          <!-- Academic Information -->
           <div class="info-card">
             <div class="card-header">
               <h2 class="card-title">Academic Information</h2>
@@ -150,7 +147,7 @@
             <div class="info-row"><div class="info-label">Academic Status:</div><div class="info-value"><span class="ph-academic-status"></span></div></div>
             <div class="info-row"><div class="info-label">GPA:</div><div class="info-value"><span class="ph-gpa"></div></div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -212,7 +209,7 @@
         <p>&copy; 2025 Taguig City University. All rights reserved.</p>
     </div>
 </footer>
-  <script src="/Functions/init-page.js"></script>
+  <script src="/Functions/init-instructor-page.js"></script>
   <script src="/Functions/switchFunc.js"></script>
 </body>
 </html>

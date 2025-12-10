@@ -7,7 +7,7 @@ async function init(){
 }
 async function retrieveUserInfo(){
     session_id = await cookies.getCookie("session-id")
-    const res = await server.getStudentInfo(session_id)
+    const res = await server.getProfessorInfo(session_id)
     loadAvatar(session_id)
     console.log(res)
     if(res.id=="SESSION_LOST"){
@@ -25,13 +25,14 @@ async function fillPlaceholders(user){
     placeholder.setPlaceholder("current-address", user.current_address)
     placeholder.setPlaceholder("additional-address", (user.additional_address)? user.additional_address : user.current_address)
     placeholder.setPlaceholder("email", user.email)
-    placeholder.setPlaceholder("semester-no", (user.semester_no) ? getOrdinalSuffix(user.semester_no) : "1"+getOrdinalSuffix(1))
+    placeholder.setPlaceholder("semester-no", ((user.semester_no) ? getOrdinalSuffix(user.semester_no) : "1"+getOrdinalSuffix(1))+ " Year")
     placeholder.setPlaceholder("gender", user.gender)
     placeholder.setPlaceholder("total-units", user.total_units)
     placeholder.setPlaceholder("academic-status", (user.isIrreg==1)? "Irregular":"Regular")
     placeholder.setPlaceholder("gpa", (user.gpa)? user.gpa:"N/A")
     placeholder.setPlaceholder("course-id",user.id)
     var name = divideFullname(user.stud_name)
+    placeholder.setPlaceholder("name",user.stud_name)
     placeholder.setPlaceholder("first-name", name.first_name)
     placeholder.setPlaceholder("last-name", name.last_name)
     placeholder.setPlaceholder("middle-initial", name.middle_initial)

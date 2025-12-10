@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
-  <link rel="stylesheet" href="/Styles/Student.css" />
+  <link rel="stylesheet" href="/Styles/form.css" />
   <title>Student</title>
 </head>
 <body>
@@ -79,15 +79,7 @@
                 showSuccess('Login successful! Redirecting...');
 
                 setTimeout(() => {
-                    if (username === 'admin') {
-                        window.location.href = 'Home.html';
-                    } else if (username === 'student') {
-                        window.location.href = '../Home.html';
-                    } else if (username === 'instructor') {
-                        window.location.href = 'instructor.html';
-                    } else {
-                        window.location.href = '../Home.html';
-                    }
+                    window.location.href = '../Instructor-Home.html';
                 }, 1500);
                 
                 return true;
@@ -98,7 +90,7 @@
             loginBtn.innerHTML = 'LOGGING IN...';
             loginBtn.disabled = true;
 
-            const res = await server.login({username:uname,password:password})
+            const res = await server.login({username:uname,password:password,usertype:"STUDENT"})
             if(res.id!="VALID_USER_ACCESS"){
                 showError(res.message)
                 const loginBtn = document.getElementById('loginBtn');
