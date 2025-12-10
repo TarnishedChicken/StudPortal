@@ -922,7 +922,8 @@ body.dark .switch::before{
   height: 200px;
   border-radius: 50%;
   border: 8px solid var(--body-color);
-  object-fit: cover;
+  object-fit: fill;
+  background-repeat: repeat;
 }
 
 .profile-page-wrapper .profile-info {

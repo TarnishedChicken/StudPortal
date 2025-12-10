@@ -79,7 +79,7 @@ async function uploadImage(){
     form_data.append("avatar",file_input.files[0])
     const res = await server.uploadAvatar(session_id,form_data)
     var image_url = await server.getAvatar(session_id)
-    window.location.href = "./Prof.html"
+    window.location.href = "./Instructor-Prof.html"
     setTimeout(()=>{
         loadImage(image_url)
         console.log("ello")

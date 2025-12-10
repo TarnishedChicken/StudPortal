@@ -7,7 +7,7 @@ async function init(){
 }
 async function retrieveUserInfo(){
     session_id = await cookies.getCookie("session-id")
-    const res = await server.getProfessorInfo(session_id)
+    const res = await server.getStudentInfo(session_id)
     loadAvatar(session_id)
     console.log(res)
     if(res.id=="SESSION_LOST"){
@@ -91,7 +91,7 @@ async function uploadImage(){
     console.log(res)
     var image_url = await server.getAvatar(session_id)
     console.log("ello")
-    window.location.href = "./Prof.html"
+    window.location.href = "./Student-Prof.html"
     setTimeout(()=>{
         loadImage(image_url)
         console.log("ello")
