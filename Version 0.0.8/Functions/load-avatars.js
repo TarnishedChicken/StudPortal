@@ -24,10 +24,12 @@ async function loadProfessorAvatars(){
 async function loadProfAvatar(instructor,instructors){
     const instructor_elem = document.createElement("div")
     const img = document.createElement("img")
+    console.log(instructor)
     const avatar_src = await server.getStudentsInstructorAvatar(session_id,instructor.id)
     instructor_elem.classList.add("instructor")
     img.src = avatar_src
     img.alt = instructor.prof_name
+    console.log(instructor.prof_name)
     instructor_elem.appendChild(img)
     instructors.appendChild(instructor_elem)
 }

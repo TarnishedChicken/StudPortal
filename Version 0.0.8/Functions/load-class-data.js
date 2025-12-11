@@ -14,27 +14,29 @@ async function retrieveClassData(){
 }
 
 function initTable(){
+  const class_table_constainer = document.querySelector(".class-table-container")
+  if (!class_table_constainer) return
   for(var classes of classes_db){
     const key = createKey(classes)
     console.log(classes.students)
     addClassItem(key,classes.students)
   }
+  document.querySelector(".class-item").classList.add("active")
+  loadClassList(createKey(classes_db[0]))
 }
 
 function loadClassList(classKey) {
-  const tableBody = document.getElementById("classTableBody");
+  const tableBody = document.getElementById("classTableBody")
   const students = Array(...class_data[classKey]).sort((a, b) => 
-    a.stud_name.localeCompare(b.stud_name)
-  );
-  console.log(students)
+    a.stud_name.localeCompare(b.stud_name))
   tableBody.innerHTML = students.map(s => `
     <tr>
-      <td>${"25-"+String(s.id).padStart(4,"0")}</td>
-      <td>${s.stud_name}</td>
-      <td>${s.gender}</td>
-      <td>${s.course_id}</td>
-      <td>${s.phone_no}</td>
-      <td>${s.email}</td>
+    <td>${"25-"+String(s.id).padStart(4,"0")}</td>
+    <td>${s.stud_name}</td>
+    <td>${s.gender}</td>
+    <td>${s.course_id}</td>
+    <td>${s.phone_no}</td>
+    <td>${s.email}</td>
     </tr>
   `).join("");
 }
@@ -81,10 +83,10 @@ function displayUnitSchedule(){
         }
     }
     for (var day of week){
-        let events = day.querySelector(".event")
-        if(!events){
-            createNullSchedule(day)
-        }
+      let events = day.querySelector(".event")
+      if(!events){
+          createNullSchedule(day)
+      }
     }
 }
 function createNullSchedule(day){
@@ -142,6 +144,62 @@ function openModal(key,code) {
     document.querySelector(".modal-overlay").style.display = "flex";
 }
 
+const classes_grades = {}
+
+function displayGradesTable(){
+  const grade_table_body = document.querySelector("#gradeTableBody")
+  const grade_switch = document.querySelector("#gradeSwitcher")
+  if(!grade_table_body) return -1
+  for(var classes of classes_db){
+    const key = classes.course_id + "-" + classes.batch_year + classes.section
+    classes_grades[key] = classes.students
+    const grade_item = document.createElement("div")
+    grade_item.classList.add("grade-item")
+    grade_item.innerHTML = key
+    grade_item.addEventListener("click",async ()=>{
+      fillGradeCell(key)
+    })
+    grade_switch.appendChild(grade_item)
+  }
+  const clasp = classes_db[0]
+  const key = clasp.course_id + "-" + clasp.batch_year + clasp.section
+  fillGradeCell(key)
+}
+
+function fillGradeCell(key){
+  const grade_table_body = document.querySelector("#gradeTableBody")
+  console.log(key)
+  console.log(classes_grades[key])
+  grade_table_body.innerHTML = ""
+  var count = 0
+  for(var s of classes_grades[key]){
+    grade_table_body.innerHTML += `
+    <tr>
+      <td>${s.id}</td>
+      <td>${s.stud_name}</td>
+      <td>${s.course_id}</td>
+      <td><input id="midterms-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.midterms: "—"}" value="${(s.midterms)? s.midterms: 0}" type="number" min="0" max="100" class="grade-input midterm" oninput="this.value = Math.min(this.value, 100); recalc(${count})"></td>
+      <td><input id="finals-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.finals: "—"}"  value="${(s.finals)? s.finals: 0}" type="number" min="0" max="100" class="grade-input finals" oninput="this.value = Math.min(this.value, 100); recalc(${count++})"></td>
+      <td class="final-percent">—</td>
+      <td class="final-grade">${(s.midterms)? s.midterms: "—"}</td>
+      <td class="remark">${(s.finals)? s.finals: "—"}</td>
+    </tr>`
+  }
+}
+
+function recalc(i){
+  const grade_table_body = document.querySelector("#gradeTableBody")
+  const row = grade_table_body.querySelectorAll("tr")[i]
+  const midterms = row.querySelector(".midterm")
+  const finals = row.querySelector(".finals")
+  const final_grade = (parseInt(midterms.value)+parseInt(finals.value))/2
+  const remark = (final_grade>70)? "PASSED" :"FAILED"
+  row.querySelector(".remark").innerHTML = remark
+  row.querySelector(".final-grade").innerHTML = final_grade
+  row.querySelector(".final-percent").innerHTML = final_grade+"%"
+
+}
+
 function createGradeCard(subject_name,subject_info_mess,subj_code,grid){
     const grade_card = document.createElement("div")
     const subject_info = document.createElement("div")
@@ -166,7 +224,6 @@ function createGradeCard(subject_name,subject_info_mess,subj_code,grid){
       console.log("ello")
       openModal(subject_name,subj_code)
     })
-    console.log(grade_card)
     grid.appendChild(grade_card)
 }
 
@@ -189,8 +246,7 @@ function getAppropriateIcon(subj_code){
 init().then(async ()=>{
   await retrieveClassData()
   initTable()
-  document.querySelector(".class-item").classList.add("active")
-  loadClassList(createKey(classes_db[0]))
   displayUnitSchedule()
+  displayGradesTable()
   displayGradeCards()
 })

@@ -138,23 +138,20 @@
 <br>
 <hr>
 <br>
-<script>
-  document.addEventListener("input", function (e) {
+<!-- <script>
+document.addEventListener("input", function (e) {
   if (e.target.classList.contains("grade-input")) {
     const row = e.target.closest("tr");
     const mid = parseFloat(row.querySelector(".midterm").value) || 0;
     const fin = parseFloat(row.querySelector(".finals").value) || 0;
-
     const finalPercent = (mid * 0.5) + (fin * 0.5);
     row.querySelector(".final-percent").textContent = finalPercent.toFixed(2);
-
     // Convert to final grade (sample formula)
     let finalGrade = finalPercent >= 75 ? "Passed" : "Failed";
     row.querySelector(".final-grade").textContent = finalPercent.toFixed(0);
     row.querySelector(".remark").textContent = finalGrade;
   }
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const gradeItems = document.querySelectorAll(".grade-item");
@@ -183,8 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const selected = item.dataset.class;
       const students = gradeData[selected];
-
-      // Load table
       gradeTableBody.innerHTML = "";
 
       students.forEach(s => {
@@ -193,11 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${s.id}</td>
             <td>${s.name}</td>
             <td>${s.course}</td>
-            <td><input type="number" min="0" max="100" class="grade-input midterm" oninput="this.value = Math.min(this.value, 100)"></td>
-            <td><input type="number" min="0" max="100" class="grade-input finals" oninput="this.value = Math.min(this.value, 100)"></td>
+            <td><input id="midterms-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.midterms: "—"}" value="${(s.midterms)? s.midterms: null}" type="number" min="0" max="100" class="grade-input midterm" oninput="this.value = Math.min(this.value, 100)"></td>
+            <td><input id="finals-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.finals: "—"}"  value="${(s.finals)? s.finals: null}" type="number" min="0" max="100" class="grade-input finals" oninput="this.value = Math.min(this.value, 100)"></td>
             <td class="final-percent">—</td>
-            <td class="final-grade">—</td>
-            <td class="remark">—</td>
+            <td class="final-grade">${(s.midterms)? s.midterms: "—"}</td>
+            <td class="remark">${(s.finals)? s.finals: "—"}</td>
           </tr>
         `;
       });
@@ -210,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-</script>
+</script> -->
 
 
 
@@ -223,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- ====== CHART.JS ====== -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", () => {
   const ctx = document.getElementById('gwaChart').getContext('2d');
   if (window.gwaChart) window.gwaChart.destroy();
@@ -265,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-</script>
+</script> -->
 
 <!-- Footer Section -->
 <footer class="footer-section">
