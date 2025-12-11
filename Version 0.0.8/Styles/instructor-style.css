@@ -2247,3 +2247,14 @@ body.dark .switch::before{
 .grades-section{
   overflow-x:auto;
 }
+
+
+#see-all{
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--text-color);
+}
+#see-all:hover{
+  color: red;
+  transition: var(--tran-05);
+}
