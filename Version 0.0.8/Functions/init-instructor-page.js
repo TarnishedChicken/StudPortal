@@ -9,8 +9,7 @@ async function retrieveUserInfo(){
     session_id = await cookies.getCookie("session-id")
     const res = await server.getInstructorInfo(session_id)
     loadAvatar(session_id)
-    console.log(res)
-    if(res.id=="SESSION_LOST"){
+    if(!session_id||res.id=="SESSION_LOST"){
         window.location.href = "./Login/login.html"
     } else {
         return res

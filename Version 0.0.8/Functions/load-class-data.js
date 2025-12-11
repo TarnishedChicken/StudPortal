@@ -10,7 +10,7 @@ async function retrieveClassData(){
   session_id = await cookies.getCookie("session-id")
   classes_db = await server.getClasses(session_id)
   schedule_db = await server.getInstructorSchedule(session_id)
-  console.log(schedule_db)
+  console.log(classes_db)
 }
 
 function initTable(){
@@ -152,7 +152,9 @@ function displayGradesTable(){
   if(!grade_table_body) return -1
   for(var classes of classes_db){
     const key = classes.course_id + "-" + classes.batch_year + classes.section
-    classes_grades[key] = classes.students
+    classes_grades[key] = Array(...classes.students).sort((a, b) => 
+    a.stud_name.localeCompare(b.stud_name))
+    classes_grades[key].unit_id = classes.unit_id
     const grade_item = document.createElement("div")
     grade_item.classList.add("grade-item")
     grade_item.innerHTML = key
@@ -167,6 +169,7 @@ function displayGradesTable(){
 }
 
 function fillGradeCell(key){
+  selected_key = key
   const grade_table_body = document.querySelector("#gradeTableBody")
   console.log(key)
   console.log(classes_grades[key])
@@ -180,9 +183,9 @@ function fillGradeCell(key){
       <td>${s.course_id}</td>
       <td><input id="midterms-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.midterms: "—"}" value="${(s.midterms)? s.midterms: 0}" type="number" min="0" max="100" class="grade-input midterm" oninput="this.value = Math.min(this.value, 100); recalc(${count})"></td>
       <td><input id="finals-${s.class_id}-${s.id}" placeholder="${(s.midterms)? s.finals: "—"}"  value="${(s.finals)? s.finals: 0}" type="number" min="0" max="100" class="grade-input finals" oninput="this.value = Math.min(this.value, 100); recalc(${count++})"></td>
-      <td class="final-percent">—</td>
+      <td class="final-percent">${(s.mark)? s.mark:"—"}</td>
       <td class="final-grade">${(s.midterms)? s.midterms: "—"}</td>
-      <td class="remark">${(s.finals)? s.finals: "—"}</td>
+      <td class="remark">${(s.finals)? (parseInt(s.finals)>70)?"PASSED":"FAILED": "—"}</td>
     </tr>`
   }
 }
@@ -198,6 +201,29 @@ function recalc(i){
   row.querySelector(".final-grade").innerHTML = final_grade
   row.querySelector(".final-percent").innerHTML = final_grade+"%"
 
+}
+
+async function submitGrades(){
+  const student_grades = []
+  const grade_table_body = document.querySelector("#gradeTableBody")
+  const rows = grade_table_body.querySelectorAll("tr")
+  const students = classes_grades[selected_key]
+  var count = 0
+  for(var student of students){
+    console.log(student)
+    console.log(rows[count])
+    const midterms = rows[count].querySelector(".midterm")
+    const finals = rows[count].querySelector(".finals")
+    console.log(classes_db.unit_id)
+    student_grades[count++] = {
+      id:student.id,
+      unit_id: classes_grades[selected_key].unit_id,
+      midterms: midterms.value,
+      finals:finals.value
+    }
+  }
+  console.log("here")
+  const res = await server.postClassGrades(session_id,student_grades)
 }
 
 function createGradeCard(subject_name,subject_info_mess,subj_code,grid){
@@ -242,6 +268,8 @@ function getAppropriateIcon(subj_code){
     const icon = icon_lib[subj_code]
     return (icon) ? icon : "ri-survey-line"
 }
+
+
 
 init().then(async ()=>{
   await retrieveClassData()

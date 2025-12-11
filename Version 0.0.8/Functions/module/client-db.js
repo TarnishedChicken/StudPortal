@@ -15,7 +15,8 @@ export default class Server{
         instructor: "/instructor/login",
         instructor_info : "/instructor/info",
         instructor_classes : "/instructor/classes",
-        instructor_schedule : "/instructor/schedule"
+        instructor_schedule : "/instructor/schedule",
+        instructor_post_grades : "/instructor/post/grades"
     }
     async login(account){
         let configs=Server.configs
@@ -109,6 +110,17 @@ export default class Server{
     async getClasses(session){
         let configs = Server.configs
         const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_classes}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async postClassGrades(session,student_grades){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_post_grades}/${session}`,{
+            method:"POST",
+            body:JSON.stringify({student_grades}),
+            headers: { "Content-Type": "application/json" }
+        })
         const json = await res.json()
         const obj = await JSON.parse(JSON.stringify(json))
         return obj
