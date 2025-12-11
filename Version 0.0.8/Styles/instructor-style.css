@@ -923,12 +923,6 @@ body.dark .switch::before{
   border: 8px solid var(--body-color);
   background-size: fill;
   background-repeat: repeat;
-  background-color: transparent;
-  aspect-ratio: 1/1;
-}
-
-image{
-
 }
 
 .profile-page-wrapper .profile-info {

@@ -9,6 +9,7 @@ async function retrieveUserInfo(){
     session_id = await cookies.getCookie("session-id")
     const res = await server.getStudentInfo(session_id)
     loadAvatar(session_id)
+    console.log("student")
     console.log(res)
     if(res.id=="SESSION_LOST"){
         window.location.href = "./Login/login.html"
@@ -18,21 +19,21 @@ async function retrieveUserInfo(){
 }
 async function fillPlaceholders(user){
     placeholder.setPlaceholder("name",user.stud_name)
-    placeholder.setPlaceholder("year",user.stud_year+getOrdinalSuffix(user.stud_year))
+    placeholder.setPlaceholder("year",user.stud_year+getOrdinalSuffix(user.stud_year)+" Year")
     placeholder.setPlaceholder("dob", user.dob)
     placeholder.setPlaceholder("course-desc",user.course)
     placeholder.setPlaceholder("contact-number", user.phone_no)
     placeholder.setPlaceholder("current-address", user.current_address)
     placeholder.setPlaceholder("additional-address", (user.additional_address)? user.additional_address : user.current_address)
     placeholder.setPlaceholder("email", user.email)
-    placeholder.setPlaceholder("semester-no", ((user.semester_no) ? getOrdinalSuffix(user.semester_no) : "1"+getOrdinalSuffix(1))+ " Year")
+    placeholder.setPlaceholder("semester-no", ((user.semester_no) ? getOrdinalSuffix(user.semester_no) +" Semester" : "1"+getOrdinalSuffix(1))+ " Semester")
     placeholder.setPlaceholder("gender", user.gender)
     placeholder.setPlaceholder("total-units", user.total_units)
     placeholder.setPlaceholder("academic-status", (user.isIrreg==1)? "Irregular":"Regular")
     placeholder.setPlaceholder("gpa", (user.gpa)? user.gpa:"N/A")
-    placeholder.setPlaceholder("course-id",user.id)
+    placeholder.setPlaceholder("course-id",user.course_id)
+    placeholder.setPlaceholder("student-id",String(user.batch_year).substr(2,2)+"-"+user.id)
     var name = divideFullname(user.stud_name)
-    placeholder.setPlaceholder("name",user.stud_name)
     placeholder.setPlaceholder("first-name", name.first_name)
     placeholder.setPlaceholder("last-name", name.last_name)
     placeholder.setPlaceholder("middle-initial", name.middle_initial)
@@ -64,6 +65,9 @@ function capitalize(str){
 }
 async function logout(){
     cookies.removeCookie("session-id")
+    setTimeout(()=>{
+        window.location.href = "./Login/login.html"
+    },2000)
     return
 }
 
@@ -99,5 +103,6 @@ async function uploadImage(){
 }
 init().then(async ()=>{
     const student = await retrieveUserInfo()
+    console.log(student)
     await fillPlaceholders(student)
 })

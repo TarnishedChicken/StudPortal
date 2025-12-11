@@ -55,6 +55,9 @@ function capitalize(str){
 }
 async function logout(){
     cookies.removeCookie("session-id")
+    setTimeout(()=>{
+        window.location.href = "./Login/login.html"
+    })
     return
 }
 

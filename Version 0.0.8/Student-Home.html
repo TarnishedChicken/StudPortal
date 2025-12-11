@@ -6,11 +6,10 @@
   <link rel="stylesheet" href="/Styles/student-style.css" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
-  <script src = "Functions/load-theme.js"></script>
   <title>Welcome</title>
 </head>
 <body>
-
+  <script src = "Functions/load-theme.js"></script>
   <nav class="sidebar close">
     <header>
       <div class="image-text">
@@ -138,13 +137,13 @@
             </section>
 
             <!-- Enrolled Subjects -->
-            <section class="section">
+            <section class="home-subjects section">
                 <div class="section-header">
                     <h2>Enrolled Subjects</h2>
                     <a href="/Student-Subjects.html" class="see-all">See all</a>
                 </div>
-                <div class="subjects-grid">
-                    <div class="subject-card">
+                <div class="subjects-grid" id="subjects-grid-home">
+                    <!-- <div class="subject-card">
                         <div class="subject-info">
                             <h3>Enterprise and Architecture<br><br></h3>
                         </div>
@@ -164,13 +163,13 @@
                     </div>
                     <div class="subject-card">
                         <div class="subject-info">
-                            <h3>Internet and Advance Office Productivity</h3>
+                            <h3>Internet and Advanced Office Productivity</h3>
                         </div>
                         <div class="subject-icon">
                             <i class="ri-global-line"></i>
                         </div>
                         <button class="btn-view">View</button>
-                    </div>
+                    </div> -->
                 </div>
             </section>
         </div>
@@ -184,7 +183,7 @@
                     <a href="#" class="see-all">See all</a>
                 </div>
                 <div class="instructors">
-                    <div class="instructor">
+                    <!-- <div class="instructor">
                         <img src="/img/teacher1-removebg-preview.png" alt="Instructor 1">
                     </div>
                     <div class="instructor">
@@ -193,9 +192,9 @@
                     <div class="instructor">
                         <img src="/img/teacher3-removebg-preview.png" alt="Instructor 3">
                     </div>
-                                        <div class="instructor">
+                    <div class="instructor">
                         <img src="/img/teacher3-removebg-preview.png" alt="Instructor 3">
-                    </div>
+                    </div> -->
                 </div>
             </section>
 
@@ -274,7 +273,9 @@
     </div>
 </footer>
 
-    <script src="/Functions/init-student-page.js"></script>
+  <script src="/Functions/init-student-page.js"></script>
   <script src="/Functions/switchFunc.js"></script>
+  <script src="/Functions/load-grades.js"></script>
+  <script src="/Functions/load-avatars.js"></script>
 </body>
 </html>
