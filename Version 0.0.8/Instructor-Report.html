@@ -116,9 +116,9 @@
           <td class="final-percent">—</td>
           <td class="final-grade">—</td>
           <td class="remark">—</td>
-        </tr> -->
+        </tr>
 
-        <!-- <tr>
+        <tr>
           <td>2025-002</td>
           <td>Maria Santos</td>
           <td>BSCS</td>
@@ -132,12 +132,23 @@
     </table>
   </div>
   <br>
-  <button id="submit-grades-btn1">Submit</button>
-  <button id="export-grades-btn2">Export</button>
+  <button onclick="submitGrades()"id="submit-grades-btn1">Submit</button>
+  <button onclick="submitGrades();getExport()"id="export-grades-btn2">Export</button>
 </section>
 <br>
 <hr>
 <br>
+
+
+
+
+
+
+
+
+
+
+<!-- ====== CHART.JS ====== -->
 
 <!-- Footer Section -->
 <footer class="footer-section">
@@ -191,8 +202,9 @@
         <p>&copy; 2025 Taguig City University. All rights reserved.</p>
     </div>
 </footer>
+  <script src="/Functions/classData.js"></script>
   <script src="/Functions/switchFunc.js"></script>
   <script src="/Functions/init-instructor-page.js"></script>
-  <script src="/Functions/load-class-data.js"></script>
+  <script src="/Functions/load-grades.js"></script>
 </body>
 </html>

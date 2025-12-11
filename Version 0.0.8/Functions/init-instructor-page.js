@@ -57,7 +57,7 @@ async function logout(){
     cookies.removeCookie("session-id")
     setTimeout(()=>{
         window.location.href = "./Login/login.html"
-    })
+    },2000)
     return
 }
 
