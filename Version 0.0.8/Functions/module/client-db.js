@@ -14,7 +14,8 @@ export default class Server{
         student_instructors_avatar : "/student/instructor/avatar",
         instructor: "/instructor/login",
         instructor_info : "/instructor/info",
-        instructor_classes : "/instructor/classes"
+        instructor_classes : "/instructor/classes",
+        instructor_schedule : "/instructor/schedule"
     }
     async login(account){
         let configs=Server.configs
@@ -94,6 +95,13 @@ export default class Server{
     async getStudentSchedule(session){
         let configs = Server.configs
         const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_schedule}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async getInstructorSchedule(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_schedule}/${session}`)
         const json = await res.json()
         const obj = await JSON.parse(JSON.stringify(json))
         return obj
