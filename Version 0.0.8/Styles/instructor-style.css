@@ -488,6 +488,31 @@ body.dark .switch::before{
     box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.381);
 }
 
+.UploadM, .R{
+  background-color: var(--sidebar-color);
+  width: 90px;
+  height: 35px;
+  margin: 15px 0px 0px 0px;
+  border-radius: 7px;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--tran-05);
+  display: inline-block;
+}
+.UploadM{
+  margin-right: 5px;
+}
+
+.UploadM:hover, .R:hover{
+  background-color: #a82f2f;
+  color: white;
+  cursor: pointer;
+}
+
+
+
 .section-header {
     display: flex;
     justify-content: space-between;

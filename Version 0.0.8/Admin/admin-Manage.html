@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Styles/admin-style.css" />
+  <link rel="icon" type="image/x-icon" href="/img/tcu.png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Admin • Manage Users</title>
+  <style>
+    /* Small overrides so Manage Users page*/
+    .manage-container{padding:28px;}
+    .controls{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+    .search-input{padding:10px 12px;border-radius:10px;border:1px solid #ddd;width:320px}
+    .filter-select{padding:10px;border-radius:10px;border:1px solid #ddd}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+    .btn.primary{background:#7e1fff;color:#fff}
+    .table-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    table.manage{width:100%;border-collapse:collapse}
+    table.manage th, table.manage td{padding:12px 10px;border-bottom:1px solid #eee;text-align:left}
+    table.manage th{background:#f4f5f9;color:#333}
+    .action-btn{padding:6px 10px;border-radius:8px;border:none;margin-right:6px}
+    .action-edit{background:#ffc947}
+    .action-delete{background:#ff5252;color:#fff}
+    .badge{display:inline-block;padding:6px 8px;border-radius:999px;font-size:13px}
+    .badge.Student{background:#e6f2ff;color:#0747a6}
+    .badge.Professor{background:#fff4e6;color:#7a4b00}
+    .badge.Admin{background:#f6e6ff;color:#5b2ea6}
+  </style>
+</head>
+<body>
+
+  <!-- ======= REUSED SIDEBAR (exact as you provided) ======= -->
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="/img/tcu.png" alt="logo" />
+        </span>
+        <div class="text header-text">
+          <span class="name">Taguig City University</span>
+          <span class="profession">Admin</span>
+        </div>
+      </div>
+      <i class="ri-arrow-right-s-line toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+      <div class="menu">
+        <li class="search-box">
+          <i class="ri-search-line icon"></i>
+          <input type="text" placeholder="Search..." />
+        </li>
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="Admin-Home.html"><i class="ri-home-4-line icon"></i><span class="text nav-text">Home</span></a>
+          </li>
+          <li class="nav-link">
+            <a href="admin-Manage.html" class="active"><i class="ri-user-settings-line icon"></i><span class="text nav-text">Manage Users</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <li>
+          <a onclick="logout()"><i class="ri-logout-box-line icon"></i><span class="text nav-text">Logout</span></a>
+        </li>
+        <li class="mode">
+          <div class="moon-sun">
+            <i class="ri-contrast-2-line icon moon"></i>
+            <i class="ri-sun-line icon sun"></i>
+          </div>
+          <span class="mode-text text">Dark Mode</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======= PAGE CONTENT ======= -->
+  <section class="home">
+ 
+
+
+      <div class="manage-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div>
+            <h2 style="margin:0; color:var(--text-color); font-size:32px">Manage Users</h2>
+            <small style="color: var(--text-color)">View, add, edit or remove Students, Instructors and Admins</small>
+          </div>
+          <div>
+            <button class="btn primary" onclick="openModal()">+ Add User</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <input id="globalSearch" class="search-input" placeholder="Search by name, id or email">
+          <select id="roleFilter" class="filter-select">
+            <option value="all">All Roles</option>
+            <option value="Student">Students</option>
+            <option value="Professor">Instructors</option>
+            <option value="Admin">Admins</option>
+          </select>
+          <button class="btn" onclick="exportCSV()">Export CSV</button>
+        </div>
+
+        <div class="table-card">
+          <table class="manage" id="usersTable">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTbody">
+              <!-- populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    <hr>
+
+    <footer class="footer-section">
+      <div class="footer-content">
+        <div class="footer-left">
+          <div class="footer-logo">
+            <img src="/img/tcu.png" alt="TCU Logo" class="logo-image">
+            <div class="footer-title"><h2>TCU</h2><p class="footer-subtitle">Taguig City University</p></div>
+          </div>
+          <p class="footer-description">TCU has garnered national recognition for its achievements and dedication to academic excellence.</p>
+          <div class="footer-address">
+            <strong>Address:</strong> Gen. Santos Ave., Central Bicutan, Taguig City<br>
+            <strong>Phone:</strong> 8635-8300
+          </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-right">
+          <h3 class="quick-links-title">Quick Links</h3>
+          <div class="quick-links">
+            <a href="#">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">About</a>
+            <a href="#">Help & Support</a>
+          </div>
+          <div class="footer-badges">
+            <div class="badge"><img src="/img/I_Love_Taguig_logo_white.png" class="badge-image"></div>
+            <div class="badge"><img src="/img/Seal_of_registration_AIBC_1_01Apr2024.png" class="badge-image"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
+
+      <div class="footer-bottom"><p>&copy; 2025 Taguig City University. All rights reserved.</p></div>
+    </footer>
+  </section>
+
+  <!-- ======= MODAL (Add / Edit) ======= -->
+  <div id="modalBg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);justify-content:center;align-items:center">
+    <div style="background:#fff;padding:18px;border-radius:12px;width:420px;box-shadow:0 10px 30px rgba(0,0,0,0.15)">
+      <h3 id="modalTitle">Add User</h3>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input id="uid" placeholder="User ID (eg. 2025-001)" style="flex:1;padding:10px;border-radius:8px;border:1px solid #ddd">
+      </div>
+      <input id="fullname" placeholder="Full name" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px">
+      <input id="email" placeholder="Email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px">
+      <select id="role" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px">
+        <option value="Student">Student</option>
+        <option value="Professor">Professor</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        <button class="btn primary" onclick="saveUser()">Save</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // sample combined list (Students, Professors, Admins)
+  let users = [
+    { id: '2025-001', name: 'Juan Dela Cruz', email: 'juan@tcu.edu', role: 'Student' },
+    { id: '2025-002', name: 'Maria Santos', email: 'maria@tcu.edu', role: 'Professor' },
+    { id: '2025-003', name: 'Admin User', email: 'admin@tcu.edu', role: 'Admin' },
+    { id: '2025-004', name: 'Carlos Perez', email: 'carlos@tcu.edu', role: 'Student' },
+    { id: '2025-005', name: 'Ana Dizon', email: 'ana@tcu.edu', role: 'Professor' }
+  ];
+
+  let editIndex = null;
+
+  function renderUsers(){
+    const tbody = document.getElementById('usersTbody');
+    tbody.innerHTML = '';
+    const search = (document.getElementById('globalSearch').value || '').toLowerCase();
+    const roleFilter = document.getElementById('roleFilter').value;
+
+    users.filter(u => {
+      if(roleFilter !== 'all' && u.role !== roleFilter) return false;
+      if(!search) return true;
+      return (u.name + ' ' + u.id + ' ' + u.email).toLowerCase().includes(search);
+    }).forEach((u,i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.name}</td>
+          <td>${u.email}</td>
+          <td><span class="badge ${u.role}">${u.role}</span></td>
+          <td>
+            <button class="action-btn action-edit" onclick="openEdit(${i})">Edit</button>
+            <button class="action-btn action-delete" onclick="removeUser(${i})">Delete</button>
+          </td>
+        </tr>`;
+    });
+  }
+
+  function openModal(){
+    editIndex = null;
+    document.getElementById('modalTitle').textContent = 'Add User';
+    document.getElementById('uid').value = '';
+    document.getElementById('fullname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('role').value = 'Student';
+    document.getElementById('modalBg').style.display = 'flex';
+  }
+  function closeModal(){ document.getElementById('modalBg').style.display = 'none'; }
+
+  function saveUser(){
+    const id = document.getElementById('uid').value.trim();
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const role = document.getElementById('role').value;
+    if(!id || !name || !email){ alert('Please fill all fields'); return; }
+
+    if(editIndex === null){
+      users.push({ id, name, email, role });
+    } else {
+      users[editIndex] = { id, name, email, role };
+    }
+    closeModal(); renderUsers();
+  }
+
+  function openEdit(i){
+    editIndex = i;
+    const u = users[i];
+    document.getElementById('modalTitle').textContent = 'Edit User';
+    document.getElementById('uid').value = u.id;
+    document.getElementById('fullname').value = u.name;
+    document.getElementById('email').value = u.email;
+    document.getElementById('role').value = u.role;
+    document.getElementById('modalBg').style.display = 'flex';
+  }
+
+  function removeUser(i){
+    if(confirm('Delete this user?')){ users.splice(i,1); renderUsers(); }
+  }
+
+  document.getElementById('globalSearch').addEventListener('input', renderUsers);
+  document.getElementById('roleFilter').addEventListener('change', renderUsers);
+
+  function exportCSV(){
+    const rows = [['User ID','Full Name','Email','Role']];
+    users.forEach(u=> rows.push([u.id,u.name,u.email,u.role]));
+    const csv = rows.map(r=> r.map(c=> '"'+(c||'')+'"').join(',')).join('\n');
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'tcu_users.csv'; a.click(); URL.revokeObjectURL(url);
+  }
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // wire buttons from hero/dashboard if present
+    const ms = document.getElementById('manage-students'); if(ms) ms.addEventListener('click', ()=>{ document.getElementById('roleFilter').value='Student'; renderUsers(); });
+    const mi = document.getElementById('manage-instructors'); if(mi) mi.addEventListener('click', ()=>{ document.getElementById('roleFilter').value='Professor'; renderUsers(); });
+    const ma = document.getElementById('manage-admins'); if(ma) ma.addEventListener('click', ()=>{ document.getElementById('roleFilter').value='Admin'; renderUsers(); });
+
+    document.querySelectorAll('.ph-first-name').forEach(el=>el.textContent='Admin');
+    document.querySelectorAll('.ph-name').forEach(el=>el.textContent='Administrator');
+    const dateEl = document.getElementById('todayDate'); if(dateEl){ const d=new Date(); dateEl.textContent = d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
+
+    renderUsers();
+  });
+
+  function logout(){ if(confirm('Logout now?')) location.href='/Login/login.html'; }
+</script>
+
+  <script src="/Functions/init-instructor-page.js"></script>
+  <script src="/Functions/switchFunc.js"></script>
+</body>
+</html>
