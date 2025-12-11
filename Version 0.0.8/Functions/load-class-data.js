@@ -253,6 +253,39 @@ function createGradeCard(subject_name,subject_info_mess,subj_code,grid){
     grid.appendChild(grade_card)
 }
 
+function displayActiveClasses(){
+    const classes_grid = document.querySelector(".subjects-grid")
+    console.log(classes_grid)
+    if(!classes_grid) return
+    var count = 0 
+    for (var classes of classes_db){
+        if (count++>=3) break 
+        createClassCard(classes.subj_code,classes.subj_desc,classes_grid)
+    }
+}
+
+function createClassCard(subj_code,subj_info,grid){
+    const subject_card = document.createElement("div")
+    const subject_info = document.createElement("div")
+    const text = document.createElement("h3")
+    const subject_icon = document.createElement("div")
+    const icon = document.createElement("i")
+    const button = document.createElement("button")
+    subject_card.classList.add("subject-card")
+    subject_info.classList.add("subject-info")
+    subject_icon.classList.add("subject-icon")
+    icon.classList.add(getAppropriateIcon(subj_code))
+    button.classList.add("btn-view")
+    text.innerHTML = subj_info
+    button.innerHTML = "View"
+    subject_info.appendChild(text)
+    subject_icon.appendChild(icon)
+    subject_card.appendChild(subject_info)
+    subject_card.appendChild(subject_icon)
+    subject_card.appendChild(button)
+    grid.appendChild(subject_card)
+}
+
 function getAppropriateIcon(subj_code){
     const icon_lib = {
         "CC 106": "ri-robot-3-fill",
@@ -271,10 +304,12 @@ function getAppropriateIcon(subj_code){
 
 
 
+
 init().then(async ()=>{
   await retrieveClassData()
   initTable()
   displayUnitSchedule()
   displayGradesTable()
   displayGradeCards()
+  displayActiveClasses()
 })

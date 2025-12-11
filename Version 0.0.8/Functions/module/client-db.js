@@ -16,7 +16,12 @@ export default class Server{
         instructor_info : "/instructor/info",
         instructor_classes : "/instructor/classes",
         instructor_schedule : "/instructor/schedule",
-        instructor_post_grades : "/instructor/post/grades"
+        instructor_post_grades : "/instructor/post/grades",
+        instructor_materials : "/instructor/materials",
+        instructor_students : "/instructor/students",
+        instructor_students_avatar : "/instructor/student/avatar",
+        material_upload : "/material",
+        material : "/material"
     }
     async login(account){
         let configs=Server.configs
@@ -56,10 +61,8 @@ export default class Server{
     async getStudentsInstructorAvatar(session,id){
         let configs= Server.configs
         const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_instructors_avatar}/${session}/${id}`)
-        console.log(res)
         const imageblob = await res.blob()
         const imageurl = URL.createObjectURL(imageblob)
-        console.log(imageurl)
         return imageurl
     }
     async getInstructorInfo(session){
@@ -125,4 +128,43 @@ export default class Server{
         const obj = await JSON.parse(JSON.stringify(json))
         return obj
     }
+    async getMaterial(session,material_id){
+        let configs= Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.material}/${session}/${material_id}`)
+        const objblob = await res.blob()
+        const objurl = URL.createObjectURL(objblob)
+        return objurl
+    }
+    async getInstructorMaterials(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_materials}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async uploadMaterial(session,unit_id,header,material_desc,file){
+        let configs= Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.material_upload}/${unit_id}/${session}/${header}/${material_desc}`,{
+            method: "POST",
+            body: file
+        })
+        return setTimeout(()=>{
+            return this.getAvatar(session)
+        },2000)
+    }
+    async getInstructorStudents(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_students}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async getInstructorStudentsAvatar(session,id){
+        let configs=Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor_students_avatar}/${session}/${id}`)
+        const imageblob = await res.blob()
+        const imageurl = URL.createObjectURL(imageblob)
+        return imageurl
+    }
+    
 }
