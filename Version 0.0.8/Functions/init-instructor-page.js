@@ -57,7 +57,7 @@ async function logout(){
     cookies.removeCookie("session-id")
     setTimeout(()=>{
         window.location.href = "./Login/login.html"
-    },2000)
+    })
     return
 }
 
@@ -92,3 +92,30 @@ init().then(async ()=>{
     const user = await retrieveUserInfo()
     await fillPlaceholders(user)
 })
+
+
+
+
+// Select the Add button
+const addBtn = document.querySelector('.UploadM');
+addBtn.addEventListener('click', () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.pdf,.doc,.docx';
+  fileInput.style.display = 'none';
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const allowedTypes = ['application/pdf', 
+                          'application/msword', 
+                          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Only document files (PDF, DOC, DOCX) are allowed.');
+      return;
+    }
+    alert(`File "${file.name}" accepted!`);
+  });
+  document.body.appendChild(fileInput);
+  fileInput.click();
+  document.body.removeChild(fileInput);
+});
