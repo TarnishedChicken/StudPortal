@@ -32,7 +32,7 @@ async function fillPlaceholders(user){
     placeholder.setPlaceholder("academic-status", (user.isIrreg==1)? "Irregular":"Regular")
     placeholder.setPlaceholder("gpa", (user.gpa)? user.gpa:"N/A")
     placeholder.setPlaceholder("course-id",user.course_id)
-    placeholder.setPlaceholder("student-id",String(user.batch_year).substr(2,2)+"-"+user.id)
+    placeholder.setPlaceholder("stud-id",String(user.batch_year).substr(2,2)+"-"+String(user.id).padStart(4,"0"))
     var name = divideFullname(user.stud_name)
     placeholder.setPlaceholder("first-name", name.first_name)
     placeholder.setPlaceholder("last-name", name.last_name)

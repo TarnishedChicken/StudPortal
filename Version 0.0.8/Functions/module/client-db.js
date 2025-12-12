@@ -12,6 +12,7 @@ export default class Server{
         student_subjects : "/student/subjects",
         student_instructors : "/student/instructors",
         student_instructors_avatar : "/student/instructor/avatar",
+        student_materials : "/student/materials",
         instructor: "/instructor/login",
         instructor_info : "/instructor/info",
         instructor_classes : "/instructor/classes",
@@ -166,5 +167,11 @@ export default class Server{
         const imageurl = URL.createObjectURL(imageblob)
         return imageurl
     }
-    
+    async getStudentMaterials(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student_materials}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
 }

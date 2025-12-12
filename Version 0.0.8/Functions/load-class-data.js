@@ -21,11 +21,15 @@ function initTable(){
     console.log(classes.students)
     addClassItem(key,classes.students)
   }
-  document.querySelector(".class-item").classList.add("active")
   loadClassList(createKey(classes_db[0]))
 }
 
+var prev_element_key = null
+
 function loadClassList(classKey) {
+  if(prev_element_key) class_data[prev_element_key].item.classList.toggle("active")
+  class_data[classKey].item.classList.toggle("active")
+  prev_element_key = classKey
   const tableBody = document.getElementById("classTableBody")
   const students = Array(...class_data[classKey]).sort((a, b) => 
     a.stud_name.localeCompare(b.stud_name))
@@ -45,14 +49,12 @@ const class_data = {}
 
 function addClassItem(key,class_list){
   class_data[key] = class_list
-  console.log("ello")
   const class_switcher = document.querySelector(".class-switcher")
   const class_item = document.createElement("div")
   class_item.classList.add("class-item")
+  class_data[key].item = class_item
   class_item.innerHTML = key
   class_item.addEventListener("click",(e)=>{
-    
-    console.log("ello")
     loadClassList(key)
   })
   class_switcher.appendChild(class_item)
@@ -145,6 +147,7 @@ function openModal(key,code) {
 }
 
 const classes_grades = {}
+var selected_key = null
 
 function displayGradesTable(){
   const grade_table_body = document.querySelector("#gradeTableBody")
@@ -157,6 +160,7 @@ function displayGradesTable(){
     classes_grades[key].unit_id = classes.unit_id
     const grade_item = document.createElement("div")
     grade_item.classList.add("grade-item")
+    classes_grades[key].item = grade_item
     grade_item.innerHTML = key
     grade_item.addEventListener("click",async ()=>{
       fillGradeCell(key)
@@ -169,8 +173,10 @@ function displayGradesTable(){
 }
 
 function fillGradeCell(key){
+  if (selected_key)classes_grades[selected_key].item.classList.toggle("active")
   selected_key = key
   const grade_table_body = document.querySelector("#gradeTableBody")
+  classes_grades[key].item.classList.toggle("active")
   console.log(key)
   console.log(classes_grades[key])
   grade_table_body.innerHTML = ""
@@ -254,7 +260,7 @@ function createGradeCard(subject_name,subject_info_mess,subj_code,grid){
 }
 
 function displayActiveClasses(){
-    const classes_grid = document.querySelector(".subjects-grid")
+    const classes_grid = document.querySelector("#homesun.subjects-grid")
     console.log(classes_grid)
     if(!classes_grid) return
     var count = 0 

@@ -10,11 +10,14 @@ async function retrieveUserGrades(){
     const session_id = cookies.getCookie("session-id")
     subjects_db = await server.getStudentSubjects(session_id)
     grades_db = await server.getStudentGrades(session_id)
+    console.log("ello")
+    console.log(grades_db)
     schedule_db = await server.getStudentSchedule(session_id)
     console.log(subjects_db)
     if(grades_db.id=="SESSION_LOST"){
         window.location.href = "./Login/login.html"
     }
+    
 }
 
 async function displayGradesTable(){
@@ -25,7 +28,8 @@ async function displayGradesTable(){
         "UNITS" : "units",
         "PROFESSOR" : "prof_name",
         "SUBJECT TITLE" : "subj_name", 
-        "MARK" : "mark"
+        "MARK" : "mark",
+        "GRADE" : "mark"
     }
     for(let table of grade_table){
         const headers = table.querySelectorAll("th")
@@ -41,6 +45,7 @@ async function displayGradesTable(){
             for(let column of columns){
                 const cell = document.createElement("td")
                 cell.innerHTML = (grade[column_ids[column.toUpperCase()]]===undefined) ? "N/A" : grade[column_ids[column.toUpperCase()]]
+                if(column == "Remarks") cell.innerHTML = (!grade.mark)? "N/A" : (grade.mark>70) ? "PASSED" : "FAILED"
                 row.appendChild(cell)
             }
             console.log(row)
