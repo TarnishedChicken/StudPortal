@@ -876,11 +876,22 @@
   </div>
 
   <script>
+    async function init(){
+        mymodule = await import('../Functions/tcusias-module-package.js')
+        mymodule = mymodule.default
+        cookies = new mymodule.CookieHandler
+        server = new mymodule.Server
+        placeholder = new mymodule.Placeholders
+    }
+    init()
+
     // Tab switching function
     const loginContent = document.getElementById('loginContent');
     const enrollContent = document.getElementById('enrollContent');
     const loginTab = document.getElementById('loginTab');
     const enrollTab = document.getElementById('enrollTab');
+    const submitBt = document.getElementById('submitBtn');
+    submitBt.addEventListener("click",submitAdmissionForm)
 
     function openTab(content, tab) {
       const tabContents = document.querySelectorAll('.tabContent');
@@ -1103,7 +1114,7 @@
       summaryDiv.innerHTML = summaryHTML;
     }
 
-    function submitAdmissionForm(event) {
+    async function submitAdmissionForm(event) {
       event.preventDefault();
       
       if (!validateStep(currentStep)) {
@@ -1128,6 +1139,8 @@
       const form = document.getElementById('admissionForm');
       const formData = new FormData(form);
       const applicationData = Object.fromEntries(formData.entries());
+
+      await server.submitApplication(applicationData)
       
       // Generate reference number
       const refNumber = 'TCU-' + Date.now().toString().slice(-8);

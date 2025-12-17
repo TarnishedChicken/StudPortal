@@ -22,7 +22,8 @@ export default class Server{
         instructor_students : "/instructor/students",
         instructor_students_avatar : "/instructor/student/avatar",
         material_upload : "/material",
-        material : "/material"
+        material : "/material",
+        submit_application : "/admission/student"
     }
     async login(account){
         let configs=Server.configs
@@ -173,5 +174,20 @@ export default class Server{
         const json = await res.json()
         const obj = await JSON.parse(JSON.stringify(json))
         return obj
+    }
+    async submitApplication(data){
+        console.log(data)
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.submit_application}`,{
+            method : "POST",
+            body : JSON.stringify(data),
+            headers: { "Content-Type": "application/json" }
+        })
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async getAdminAccess(session){
+
     }
 }

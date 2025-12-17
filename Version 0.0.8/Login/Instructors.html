@@ -34,7 +34,7 @@
 <div id="success-message" class="success-message"></div>
 <form>
    
-   <div class="form-group">
+   <div class="form-group" onsubmit="return validateLogin(event)">
        <div class="input-container">
            <div class="input-icon"><i class="ri-user-fill"></i></div>
            <input id="username" type="text" class="form-input" placeholder="USER ID:" required>
@@ -48,7 +48,7 @@
       </div>
     </div>
         
-    <button onclick="validateLogin()" id="loginBtn" class="login-btn">LOGIN</button>
+    <button onclick="validateLogin(event)" id="loginBtn" class="login-btn">LOGIN</button>
 </form>
 
 
