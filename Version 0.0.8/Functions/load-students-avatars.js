@@ -9,6 +9,7 @@ async function init(){
 async function retrieveAvatars(){
     session_id = await cookies.getCookie("session-id")
     students_db = await server.getInstructorStudents(session_id)
+    console.log(students_db)
 }
 
 async function loadProfessorAvatars(){
