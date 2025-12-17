@@ -5,7 +5,613 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link rel="stylesheet" href="/Styles/login.css" />
-  <title>Login</title>
+  <title>Login - TCU SIAS</title>
+  <style>
+    /* Admission Modal Styles with TCU Color Palette */
+    .admission-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .admission-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      width: 90%;
+      max-width: 550px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 2px solid #b30000;
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #b30000 0%, #ED1D25 100%);
+      color: white;
+      padding: 20px;
+      position: relative;
+      border-bottom: 3px solid #800000;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header p {
+      margin: 5px 0 0 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid white;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .close-modal:hover {
+      background: rgba(0, 0, 0, 0.5);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 25px;
+      max-height: 60vh;
+      overflow-y: auto;
+      background: rgba(245, 245, 245, 0.95);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #b30000;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #b30000;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #800000;
+      box-shadow: 0 0 0 3px rgba(179, 0, 0, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .program-options {
+      margin-top: 15px;
+    }
+
+    .program-option {
+      padding: 15px;
+      border: 2px solid #b30000;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+
+    .program-option:hover {
+      border-color: #800000;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+      transform: translateY(-2px);
+    }
+
+    .program-option.selected {
+      border-color: #800000;
+      background: linear-gradient(135deg, #ffcccc 0%, #ff9999 100%);
+      box-shadow: 0 4px 8px rgba(179, 0, 0, 0.2);
+    }
+
+    .program-option h4 {
+      margin: 0 0 5px 0;
+      color: #b30000;
+      font-weight: bold;
+    }
+
+    .program-option p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #800000;
+    }
+
+    .required {
+      color: #ff3333;
+      font-weight: bold;
+    }
+
+    .modal-footer {
+      padding: 20px;
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
+      border-top: 3px solid #b30000;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-width: 120px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ED1D25 0%, #b30000 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(179, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #666666 0%, #333333 100%);
+      color: white;
+      border: 2px solid #800000;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #888888 0%, #555555 100%);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #b30000;
+      color: #b30000;
+      font-weight: bold;
+    }
+
+    .btn-outline:hover {
+      background: #b30000;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Enroll Tab Content */
+    #enrollContent {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .enroll-card {
+      background: rgba(245, 245, 245, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      max-height: 800px;
+      margin: 0 auto;
+      border: 2px solid #b30000;
+    }
+
+    .enroll-card h2 {
+      color: #b30000;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .enroll-card p {
+      color: #800000;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .enroll-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .feature {
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      text-align: center;
+      border: 2px solid #b30000;
+      transition: all 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(179, 0, 0, 0.2);
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: #b30000;
+      margin-bottom: 15px;
+    }
+
+    .feature h4 {
+      margin: 10px 0 5px 0;
+      color: #800000;
+      font-weight: bold;
+    }
+
+    .feature p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .enroll-features {
+        grid-template-columns: 1fr;
+      }
+
+      .enroll-card {
+        padding: 20px;
+      }
+
+      .btn {
+        min-width: 100px;
+        padding: 10px 20px;
+      }
+    }
+
+    /* Checkbox Styling */
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border: 2px solid #b30000;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 15px;
+      margin-top: 3px;
+      accent-color: #b30000;
+    }
+
+    .checkbox-group label {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #800000;
+    }
+
+    .checkbox-group a {
+      color: #b30000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .checkbox-group a:hover {
+      text-decoration: underline;
+      color: #800000;
+    }
+
+    /* Success Message */
+    .success-message {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: 8px;
+      border: 2px solid #b30000;
+    }
+
+    .success-message i {
+      font-size: 4rem;
+      color: #b30000;
+      margin-bottom: 20px;
+    }
+
+    .success-message h3 {
+      color: #800000;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .success-message p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    /* Progress Steps */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 50px;
+      right: 50px;
+      height: 3px;
+      background: #b30000;
+      z-index: 1;
+    }
+
+    .step {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: white;
+      color: #b30000;
+      border: 3px solid #b30000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    .step.active .step-circle {
+      background: linear-gradient(135deg, #ED1D25 0%, #b30000 100%);
+      color: white;
+      border-color: #800000;
+      transform: scale(1.1);
+    }
+
+    .step-label {
+      font-size: 0.85rem;
+      color: #800000;
+      font-weight: 600;
+    }
+
+    .step.active .step-label {
+      color: #b30000;
+      font-weight: bold;
+    }
+
+    /* Form Steps */
+    .form-step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    /* Header Tabs */
+    .header {
+      border: 0;
+      margin: 0;
+      margin-bottom: 20px;
+      padding: 0;
+      height: 50px;
+      position: fixed;
+      top: 0;
+      left: 10px;
+      display: flex;
+      width: calc(100% - 20px);
+      border-bottom: 3px solid #b30000;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+    }
+
+    .tab {
+      width: 150px;
+      display: flex;
+      transition: 0.5s;
+      background: linear-gradient(135deg, #b30000 0%, #ED1D25 100%);
+      border: none;
+      align-items: center;
+      padding: 0px;
+      text-align: center;
+      line-height: 0px;
+      font-size: 25px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      border-right: 2px solid #800000;
+    }
+
+    .tab span {
+      margin: auto;
+    }
+
+    .selected {
+      width: 200px;
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
+      border-bottom: 5px solid #b30000;
+    }
+
+    .tab:hover {
+      background: linear-gradient(135deg, #cc0000 0%, #ff3333 100%);
+    }
+
+    /* Scrollbar Styling */
+    .modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #b30000 0%, #ED1D25 100%);
+      border-radius: 4px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #cc0000 0%, #ff3333 100%);
+    }
+
+    /* Summary Box */
+    #applicationSummary {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px solid #b30000;
+      margin-top: 15px;
+    }
+
+    #applicationSummary p {
+      margin: 8px 0;
+      color: #800000;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+
+    #applicationSummary p:last-child {
+      border-bottom: none;
+    }
+
+    #applicationSummary strong {
+      color: #b30000;
+      min-width: 150px;
+      display: inline-block;
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #b30000, transparent);
+      margin: 15px 0;
+    }
+
+    /* Enroll Button on Main Page */
+    #enrollContent .btn-primary {
+      background: linear-gradient(135deg, #ED1D25 0%, #b30000 100%);
+      color: white;
+      border: 2px solid #800000;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    #enrollContent .btn-primary:hover {
+      background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(179, 0, 0, 0.3);
+    }
+
+    /* Warning/Error States */
+    input:invalid,
+    select:invalid {
+      border-color: #ff3333 !important;
+    }
+
+    .error-message {
+      color: #ff3333;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Loading State */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #b30000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <!--header-->
@@ -33,8 +639,590 @@
   
   <!--enroll tab container-->
   <div id='enrollContent' class='tabContent'>
-    
+    <div class="enroll-card">
+      <h2>TCU Student Information & Admission System</h2>
+      <p>Begin your academic journey at Taguig City University. Apply for admission to join our community of learners and achievers.</p>
+      
+      <div class="enroll-features">
+        <div class="feature">
+          <div style="font-size: 2.5rem; color: #b30000; margin-bottom: 15px;">📝</div>
+          <h4>Easy Application</h4>
+          <p>Simple step-by-step process</p>
+        </div>
+        <div class="feature">
+          <div style="font-size: 2.5rem; color: #b30000; margin-bottom: 15px;">⏱️</div>
+          <h4>Quick Response</h4>
+          <p>Get admission status fast</p>
+        </div>
+        <div class="feature">
+          <div style="font-size: 2.5rem; color: #b30000; margin-bottom: 15px;">🎓</div>
+          <h4>Multiple Programs</h4>
+          <p>Choose from various courses</p>
+        </div>
+      </div>
+      
+      <button class="btn-primary" onclick="openAdmissionModal()">
+        Start Admission Application
+      </button>
+      
+      <p style="margin-top: 25px; font-size: 0.95rem; color: #800000; padding: 10px; background: rgba(179, 0, 0, 0.1); border-radius: 6px;">
+        Already applied? <a href="#" style="color: #b30000; text-decoration: none; font-weight: bold;" onclick="openTab(loginContent,loginTab)">Check your status here</a>
+      </p>
+    </div>
   </div>
-  <script src="/Functions/tabFunc.js"></script>
+
+  <!-- Admission Modal -->
+  <div class="admission-modal" id="admissionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>TCU Admission Application</h2>
+        <p>Step 1: Personal Information</p>
+        <button class="close-modal" onclick="closeAdmissionModal()">×</button>
+      </div>
+      
+      <form id="admissionForm" onsubmit="submitAdmissionForm(event)">
+        <div class="modal-body">
+          <!-- Progress Steps -->
+          <div class="progress-steps" id="progressSteps">
+            <div class="step active" data-step="1">
+              <div class="step-circle">1</div>
+              <div class="step-label">Personal</div>
+            </div>
+            <div class="step" data-step="2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Academic</div>
+            </div>
+            <div class="step" data-step="3">
+              <div class="step-circle">3</div>
+              <div class="step-label">Program</div>
+            </div>
+            <div class="step" data-step="4">
+              <div class="step-circle">4</div>
+              <div class="step-label">Review</div>
+            </div>
+          </div>
+
+          <!-- Step 1: Personal Information -->
+          <div class="form-step active" data-step="1">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name <span class="required">*</span></label>
+                <input type="text" name="firstName" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name <span class="required">*</span></label>
+                <input type="text" name="lastName" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" name="middleName">
+              </div>
+              <div class="form-group">
+                <label>Suffix</label>
+                <select name="suffix">
+                  <option value="">None</option>
+                  <option value="Jr">Jr</option>
+                  <option value="Sr">Sr</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Date of Birth <span class="required">*</span></label>
+              <input type="date" name="birthDate" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Gender <span class="required">*</span></label>
+              <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Email Address <span class="required">*</span></label>
+              <input type="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Phone Number <span class="required">*</span></label>
+              <input type="tel" name="phone" required pattern="[0-9]{10,11}" placeholder="09XXXXXXXXX">
+            </div>
+            
+            <div class="form-group">
+              <label>Complete Address <span class="required">*</span></label>
+              <input type="text" name="address" required placeholder="Street, Barangay, City">
+            </div>
+          </div>
+
+          <!-- Step 2: Academic Information -->
+          <div class="form-step" data-step="2">
+            <div class="form-group">
+              <label>High School Name <span class="required">*</span></label>
+              <input type="text" name="highSchool" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Year Graduated <span class="required">*</span></label>
+                <input type="number" name="gradYear" min="2000" max="2024" required>
+              </div>
+              <div class="form-group">
+                <label>General Average <span class="required">*</span></label>
+                <input type="number" name="average" min="75" max="100" step="0.01" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Are you a transferee?</label>
+              <select name="transferee" id="transfereeSelect">
+                <option value="No">No</option>
+                <option value="Yes">Yes, from another college/university</option>
+                <option value="Yes Senior High">Yes, from Senior High School</option>
+              </select>
+            </div>
+            
+            <div class="form-group" id="previousSchool" style="display: none;">
+              <label>Previous School (if transferee)</label>
+              <input type="text" name="previousSchool">
+            </div>
+          </div>
+
+          <!-- Step 3: Program Selection -->
+          <div class="form-step" data-step="3">
+            <div class="form-group">
+              <label>Preferred Program <span class="required">*</span></label>
+              <p style="color: #800000; margin-bottom: 15px;">Choose your desired degree program:</p>
+            </div>
+            
+            <div class="program-options">
+              <div class="program-option" onclick="selectProgram(this, 'BSIT')">
+                <h4>BS Information Technology</h4>
+                <p>Bachelor of Science in Information Technology</p>
+              </div>
+              
+              <div class="program-option" onclick="selectProgram(this, 'BSCS')">
+                <h4>BS Computer Science</h4>
+                <p>Bachelor of Science in Computer Science</p>
+              </div>
+              
+              <div class="program-option" onclick="selectProgram(this, 'BSE')">
+                <h4>BS Entrepreneurship</h4>
+                <p>Bachelor of Science in Entrepreneurship</p>
+              </div>
+              
+              <div class="program-option" onclick="selectProgram(this, 'BSA')">
+                <h4>BS Accountancy</h4>
+                <p>Bachelor of Science in Accountancy</p>
+              </div>
+              
+              <div class="program-option" onclick="selectProgram(this, 'BSED')">
+                <h4>BS Education</h4>
+                <p>Bachelor of Science in Education</p>
+              </div>
+            </div>
+            
+            <input type="hidden" name="selectedProgram" id="selectedProgram" required>
+            
+            <div class="form-group">
+              <label>Preferred Schedule</label>
+              <select name="schedule">
+                <option value="Morning">Morning (7AM - 12NN)</option>
+                <option value="Afternoon">Afternoon (1PM - 6PM)</option>
+                <option value="Evening">Evening (6PM - 9PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 4: Review and Submit -->
+          <div class="form-step" data-step="4">
+            <div class="success-message" id="reviewContent">
+              <div style="font-size: 4rem; color: #b30000; margin-bottom: 20px;">📋</div>
+              <h3>Review Your Application</h3>
+              <p style="color: #800000;">Please review all information before submitting</p>
+              
+              <div id="applicationSummary">
+                <!-- Will be populated by JavaScript -->
+              </div>
+              
+              <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">
+                  I certify that all information provided is true and correct. I agree to the 
+                  <a href="#" onclick="alert('Terms and conditions will be displayed here.')">Terms and Conditions</a> 
+                  and understand that falsification may result in disqualification.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">Previous</button>
+          <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next Step</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching function
+    const loginContent = document.getElementById('loginContent');
+    const enrollContent = document.getElementById('enrollContent');
+    const loginTab = document.getElementById('loginTab');
+    const enrollTab = document.getElementById('enrollTab');
+
+    function openTab(content, tab) {
+      const tabContents = document.querySelectorAll('.tabContent');
+      const tabs = document.querySelectorAll('.tab');
+      
+      tabContents.forEach(tc => tc.classList.remove('selectedTab'));
+      tabs.forEach(t => t.classList.remove('selected'));
+      
+      content.classList.add('selectedTab');
+      tab.classList.add('selected');
+    }
+
+    // Admission Modal Functions
+    let currentStep = 1;
+    const totalSteps = 4;
+    let selectedProgramValue = '';
+
+    function openAdmissionModal() {
+      document.getElementById('admissionModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      resetForm();
+    }
+
+    function closeAdmissionModal() {
+      document.getElementById('admissionModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      resetForm();
+    }
+
+    function resetForm() {
+      currentStep = 1;
+      selectedProgramValue = '';
+      updateSteps();
+      updateButtons();
+      
+      // Reset form steps visibility
+      document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+      });
+      document.querySelector('.form-step[data-step="1"]').classList.add('active');
+      
+      // Reset program selection
+      document.querySelectorAll('.program-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+      document.getElementById('selectedProgram').value = '';
+      
+      // Reset form data
+      document.getElementById('admissionForm').reset();
+      
+      // Hide previous school field
+      document.getElementById('previousSchool').style.display = 'none';
+    }
+
+    function updateSteps() {
+      document.querySelectorAll('.step').forEach(step => {
+        const stepNum = parseInt(step.dataset.step);
+        if (stepNum <= currentStep) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+      
+      // Update modal header
+      const stepLabels = ['Personal Information', 'Academic Background', 'Program Selection', 'Review & Submit'];
+      const header = document.querySelector('.modal-header p');
+      if (header) {
+        header.textContent = `Step ${currentStep}: ${stepLabels[currentStep - 1]}`;
+      }
+    }
+
+    function updateButtons() {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+      
+      if (currentStep === totalSteps) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+        generateSummary();
+      } else {
+        nextBtn.style.display = 'block';
+        submitBtn.style.display = 'none';
+      }
+    }
+
+    function nextStep() {
+      // Validate current step before proceeding
+      if (!validateStep(currentStep)) {
+        return;
+      }
+      
+      // Hide current step
+      const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+      currentStepEl.classList.remove('active');
+      
+      // Show next step
+      currentStep++;
+      const nextStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+      nextStepEl.classList.add('active');
+      
+      updateSteps();
+      updateButtons();
+    }
+
+    function prevStep() {
+      // Hide current step
+      const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+      currentStepEl.classList.remove('active');
+      
+      // Show previous step
+      currentStep--;
+      const prevStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+      prevStepEl.classList.add('active');
+      
+      updateSteps();
+      updateButtons();
+    }
+
+    function selectProgram(element, programCode) {
+      // Remove selection from all options
+      document.querySelectorAll('.program-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+      
+      // Add selection to clicked option
+      element.classList.add('selected');
+      selectedProgramValue = programCode;
+      document.getElementById('selectedProgram').value = programCode;
+      
+      // Remove error border if any
+      element.style.borderColor = '#800000';
+    }
+
+    function validateStep(step) {
+      const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+      let isValid = true;
+      
+      // Check required inputs
+      const inputs = stepEl.querySelectorAll('input[required], select[required]');
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.style.borderColor = '#ff3333';
+          input.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
+        } else {
+          input.style.borderColor = '#b30000';
+          input.style.boxShadow = 'none';
+        }
+      });
+      
+      // Special validation for email
+      const emailInput = stepEl.querySelector('input[type="email"]');
+      if (emailInput && emailInput.value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+          isValid = false;
+          emailInput.style.borderColor = '#ff3333';
+          emailInput.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
+          alert('Please enter a valid email address');
+        }
+      }
+      
+      // Special validation for program selection in step 3
+      if (step === 3) {
+        const programInput = document.getElementById('selectedProgram');
+        if (!programInput.value) {
+          isValid = false;
+          alert('Please select a program');
+          // Highlight all program options
+          document.querySelectorAll('.program-option').forEach(option => {
+            option.style.borderColor = '#ff3333';
+          });
+        }
+      }
+      
+      if (!isValid) {
+        alert('Please fill in all required fields marked with *');
+      }
+      
+      return isValid;
+    }
+
+    function generateSummary() {
+      const form = document.getElementById('admissionForm');
+      const formData = new FormData(form);
+      const summaryDiv = document.getElementById('applicationSummary');
+      
+      const programNames = {
+        'BSIT': 'BS Information Technology',
+        'BSCS': 'BS Computer Science',
+        'BSE': 'BS Entrepreneurship',
+        'BSA': 'BS Accountancy',
+        'BSED': 'BS Education'
+      };
+      
+      let summaryHTML = `
+        <div style="text-align: left; background: white; padding: 20px; border-radius: 8px; border: 2px solid #b30000;">
+          <h4 style="color: #b30000; margin-bottom: 15px; border-bottom: 2px solid #b30000; padding-bottom: 10px;">Application Summary</h4>
+          <p><strong>Name:</strong> ${formData.get('firstName')} ${formData.get('middleName') || ''} ${formData.get('lastName')} ${formData.get('suffix') || ''}</p>
+          <p><strong>Date of Birth:</strong> ${new Date(formData.get('birthDate')).toLocaleDateString()}</p>
+          <p><strong>Gender:</strong> ${formData.get('gender')}</p>
+          <p><strong>Email:</strong> ${formData.get('email')}</p>
+          <p><strong>Phone:</strong> ${formData.get('phone')}</p>
+          <p><strong>Address:</strong> ${formData.get('address')}</p>
+          <hr style="margin: 15px 0; border: none; height: 2px; background: linear-gradient(to right, transparent, #b30000, transparent);">
+          <p><strong>High School:</strong> ${formData.get('highSchool')}</p>
+          <p><strong>Year Graduated:</strong> ${formData.get('gradYear')}</p>
+          <p><strong>General Average:</strong> ${formData.get('average')}</p>
+          ${formData.get('transferee') !== 'No' ? `<p><strong>Previous School:</strong> ${formData.get('previousSchool') || 'N/A'}</p>` : ''}
+          <hr style="margin: 15px 0; border: none; height: 2px; background: linear-gradient(to right, transparent, #b30000, transparent);">
+          <p><strong>Selected Program:</strong> ${programNames[selectedProgramValue] || selectedProgramValue}</p>
+          <p><strong>Preferred Schedule:</strong> ${formData.get('schedule')}</p>
+        </div>
+      `;
+      
+      summaryDiv.innerHTML = summaryHTML;
+    }
+
+    function submitAdmissionForm(event) {
+      event.preventDefault();
+      
+      if (!validateStep(currentStep)) {
+        return;
+      }
+      
+      // Check terms acceptance
+      const termsCheckbox = document.getElementById('terms');
+      if (!termsCheckbox.checked) {
+        alert('Please accept the terms and conditions');
+        termsCheckbox.parentElement.style.borderColor = '#ff3333';
+        return;
+      }
+      
+      // Disable submit button and show loading
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Submitting... <div class="loading"></div>';
+      submitBtn.disabled = true;
+      
+      // In a real application, you would send this data to a server
+      const form = document.getElementById('admissionForm');
+      const formData = new FormData(form);
+      const applicationData = Object.fromEntries(formData.entries());
+      
+      // Generate reference number
+      const refNumber = 'TCU-' + Date.now().toString().slice(-8);
+      
+      // Simulate API call delay
+      setTimeout(() => {
+        // Show success message
+        const reviewContent = document.getElementById('reviewContent');
+        reviewContent.innerHTML = `
+          <div style="color: #b30000; font-size: 4rem;">✓</div>
+          <h3>Application Submitted Successfully!</h3>
+          <p>Your application has been received. You will receive a confirmation email shortly.</p>
+          <div style="background: linear-gradient(135deg, #ffcccc 0%, #ff9999 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #b30000;">
+            <p style="margin: 0; color: #800000; font-weight: bold;">Application Reference Number:</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.5rem; color: #b30000; font-weight: bold;">${refNumber}</p>
+          </div>
+          <p style="font-size: 0.9rem; color: #800000; margin-top: 20px;">
+            Please save your reference number for tracking your application status.
+          </p>
+          <button class="btn btn-outline" onclick="closeAdmissionModal(); openTab(loginContent, loginTab);" style="margin-top: 20px; padding: 12px 30px;">
+            Return to Login
+          </button>
+        `;
+        
+        // Update buttons
+        document.getElementById('prevBtn').style.display = 'none';
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'none';
+        
+        // In a real application, you would send the data to your server
+        console.log('Application submitted:', applicationData);
+        console.log('Reference Number:', refNumber);
+        
+        // Reset submit button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+      }, 1500);
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('admissionModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeAdmissionModal();
+      }
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add transferee field toggle
+      const transfereeSelect = document.getElementById('transfereeSelect');
+      const previousSchoolDiv = document.getElementById('previousSchool');
+      
+      if (transfereeSelect && previousSchoolDiv) {
+        transfereeSelect.addEventListener('change', function() {
+          previousSchoolDiv.style.display = this.value !== 'No' ? 'block' : 'none';
+        });
+      }
+      
+      // Set max date for birth date (must be at least 16 years old)
+      const birthDateInput = document.querySelector('input[name="birthDate"]');
+      if (birthDateInput) {
+        const maxDate = new Date();
+        maxDate.setFullYear(maxDate.getFullYear() - 16);
+        birthDateInput.max = maxDate.toISOString().split('T')[0];
+        
+        // Set min date (100 years ago)
+        const minDate = new Date();
+        minDate.setFullYear(minDate.getFullYear() - 100);
+        birthDateInput.min = minDate.toISOString().split('T')[0];
+      }
+      
+      // Add input validation styling
+      const inputs = document.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (this.checkValidity()) {
+            this.style.borderColor = '#b30000';
+            this.style.boxShadow = 'none';
+          }
+        });
+        
+        input.addEventListener('invalid', function() {
+          this.style.borderColor = '#ff3333';
+          this.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
+        });
+      });
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeAdmissionModal();
+      }
+    });
+  </script>
 </body>
 </html>
