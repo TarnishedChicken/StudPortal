@@ -912,13 +912,11 @@
     function openAdmissionModal() {
       document.getElementById('admissionModal').classList.add('active');
       document.body.style.overflow = 'hidden';
-      resetForm();
     }
 
     function closeAdmissionModal() {
       document.getElementById('admissionModal').classList.remove('active');
       document.body.style.overflow = 'auto';
-      resetForm();
     }
 
     function resetForm() {
@@ -1140,8 +1138,7 @@
       const formData = new FormData(form);
       const applicationData = Object.fromEntries(formData.entries());
 
-      await server.submitApplication(applicationData)
-      
+      const res = await server.submitApplication(applicationData)
       // Generate reference number
       const refNumber = 'TCU-' + Date.now().toString().slice(-8);
       
@@ -1154,11 +1151,13 @@
           <h3>Application Submitted Successfully!</h3>
           <p>Your application has been received. You will receive a confirmation email shortly.</p>
           <div style="background: linear-gradient(135deg, #ffcccc 0%, #ff9999 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #b30000;">
-            <p style="margin: 0; color: #800000; font-weight: bold;">Application Reference Number:</p>
-            <p style="margin: 10px 0 0 0; font-size: 1.5rem; color: #b30000; font-weight: bold;">${refNumber}</p>
+            <p style="margin: 0; color: #800000; font-weight: bold;">Username :</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.5rem; color: #b30000; font-weight: bold;">${res.username}</p>
+            <p style="margin: 0; color: #800000; font-weight: bold;">Passkey :</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.5rem; color: #b30000; font-weight: bold;">TCUA-${String(res.pass).padStart(4,"0")}</p>
           </div>
           <p style="font-size: 0.9rem; color: #800000; margin-top: 20px;">
-            Please save your reference number for tracking your application status.
+            Please save your credentials for tracking your application status.
           </p>
           <button class="btn btn-outline" onclick="closeAdmissionModal(); openTab(loginContent, loginTab);" style="margin-top: 20px; padding: 12px 30px;">
             Return to Login

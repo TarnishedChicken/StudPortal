@@ -21,9 +21,17 @@ export default class Server{
         instructor_materials : "/instructor/materials",
         instructor_students : "/instructor/students",
         instructor_students_avatar : "/instructor/student/avatar",
+        admin : "/admin/login",
+        admin_admins: "/admin/admins",
+        admin_students : "/admin/students",
+        admin_instructors : "/admin/instructors",
+        admin_add : "/admin/add",
+        admin_delete : "/admin/delete",
+        admin_update : "/admin/update",
         material_upload : "/material",
         material : "/material",
-        submit_application : "/admission/student"
+        submit_application : "/admission/student",
+        get_application : "/admission/student"
     }
     async login(account){
         let configs=Server.configs
@@ -32,6 +40,8 @@ export default class Server{
             res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.student}/${account.username}/${account.password}`)
         } else if(account.usertype == "INSTRUCTOR"){
             res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.instructor}/${account.username}/${account.password}`)
+        } else if(account.usertype == "ADMIN"){
+            res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin}/${account.username}/${account.password}`)
         }
         console.log(res)
         const json = await res.json()
@@ -176,7 +186,6 @@ export default class Server{
         return obj
     }
     async submitApplication(data){
-        console.log(data)
         let configs = Server.configs
         const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.submit_application}`,{
             method : "POST",
@@ -187,7 +196,65 @@ export default class Server{
         const obj = await JSON.parse(JSON.stringify(json))
         return obj
     }
-    async getAdminAccess(session){
-
+    async getApplication(account){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.get_application}/${account.username}/${account.password}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminGetStudents(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_students}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminGetInstructors(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_instructors}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminGetAdmins(session){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_admins}/${session}`)
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminAddAccount(session,clobj){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_add}/${session}`,{
+            method : "POST",
+            body : clobj,
+            headers: { "Content-Type": "application/json" }
+        })
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminRemoveAccount(session,clobj){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_delete}/${session}`,{
+            method : "POST",
+            body : clobj,
+            headers: { "Content-Type": "application/json" }
+        })
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
+    }
+    async adminUpdateAccount(session,clobj){
+        let configs = Server.configs
+        const res = await fetch(`${configs.header}${configs.http_ips[0]}:${configs.port}${configs.admin_update}/${session}`,{
+            method : "POST",
+            body : clobj,
+            headers: { "Content-Type": "application/json" }
+        })
+        const json = await res.json()
+        const obj = await JSON.parse(JSON.stringify(json))
+        return obj
     }
 }

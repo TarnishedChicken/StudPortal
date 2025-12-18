@@ -6,6 +6,97 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="/img/tcu.png">
   <link rel="stylesheet" href="/Styles/form.css" />
+  <style>
+    .admission-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .admission-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      width: 90%;
+      max-width: 550px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 2px solid #b30000;
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #b30000 0%, #ED1D25 100%);
+      color: white;
+      padding: 20px;
+      position: relative;
+      border-bottom: 3px solid #800000;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header p {
+      margin: 5px 0 0 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid white;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .close-modal:hover {
+      background: rgba(0, 0, 0, 0.5);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 25px;
+      max-height: 60vh;
+      overflow-y: auto;
+      background: rgba(245, 245, 245, 0.95);
+    }
+  </style>
   <title>Student</title>
 </head>
 <body>
@@ -50,7 +141,13 @@
         
         <button onclick="validateLogin(e)" id="loginBtn" class="login-btn">LOGIN</button>
     </form>
-
+<div class="admission-modal" id="admissionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>ADMISSION INFO :</h3>
+      </div>
+    </div>
+</div>
     <script>
         async function init(){
             mymodule = await import('../Functions/tcusias-module-package.js')
@@ -60,6 +157,26 @@
             placeholder = new mymodule.Placeholders
         }
         init()
+
+        const admission_modal = document.querySelector(".admission-modal")
+        const modal_content = document.querySelector(".modal-content")
+        const modal_header = document.querySelector(".modal-header")
+
+        function openAdmissionModal() {
+            admission_modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdmissionModal() {
+            admission_modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        admission_modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdmissionModal()
+            }
+        });
+
         //====validation function=====
         async function validateLogin(event) {
             event.preventDefault();
@@ -74,6 +191,41 @@
                 return false;
             }
             
+            if(password.substr(0,5)=="TCUA-"){
+                const acc={
+                    username:username,
+                    password:password
+                }
+                const res = await server.getApplication(acc)
+                if(!res) {
+                    showError('Invalid username or password')
+                    return
+                }
+                color_status = {
+                    "PENDING" : "orange",
+                    "DENIED"  : "red",
+                    "APPROVED": "green"
+                }
+                modal_content.innerHTML =`
+                    <div style="text-align: left; background: white; padding: 20px; border-radius: 8px; border: 2px solid #b30000;">
+                    <h4 style="color: #b30000; margin-bottom: 15px; border-bottom: 2px solid #b30000; padding-bottom: 10px;">Application Summary</h4>
+                    <p><strong>Name:</strong> ${res.stud_name} </p>
+                    <p><strong>Date of Birth:</strong> ${new Date(res.dob).toLocaleDateString()}</p>
+                    <p><strong>Gender:</strong> ${res.gender}</p>
+                    <p><strong>Email:</strong> ${res.email}</p>
+                    <p><strong>Phone:</strong> ${res.phone}</p>
+                    <p><strong>Address:</strong> ${res.address}</p>
+                    <hr style="margin: 15px 0; border: none; height: 2px; background: linear-gradient(to right, transparent, #b30000, transparent);">
+                    <p><strong>High School:</strong> ${res.high_school}</p>
+                    <p><strong>Selected Program:</strong> ${res.course_id}</p>
+                    <hr style="margin: 15px 0; border: none; height: 2px; background: linear-gradient(to right, transparent, #b30000, transparent);">
+                    <p style="display:flex; justify-items:space-between"><strong style="margin:auto;font-weight:700;font-size:25px">Status :</strong><span style="margin:auto;color:${color_status[(!res.status)? "PENDING":res.status]};font-weight:700;font-size:25px"> ${(!res.status)? "PENDING":res.status}</span></p>
+                    </div>
+                `
+                console.log(res)
+                openAdmissionModal()
+                return
+            }
             
             if (await validateCredentials(username,password)) {
                 showSuccess('Login successful! Redirecting...');
